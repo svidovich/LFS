@@ -2,28 +2,42 @@ Day 1: Preface and More
 
 Some notes
 
-- We will be following the linux standards as closely as possible, including the following:
-  > POSIX.1-2008
-  > Filesystem Hierarchy Standard 3.0
-  > Linux Standard Base Version 5
-
-The latter of these has four standards: Core, Desktop, Runtime Languages and Imaging.
-The main need of LSB is to ensure that proprietary software can be installed and used.
-I will have a choice whether I want to install all packages specified by LSB.
-It will be likely that the resultant system in LFS will not pass LSB certifications; 
-this can be done with a BLFS ( your next project, lol )
-
-Packages supplied by LFS to satisfy LSB:
-Bash / Bc / Binutils / Coreutils / Diffutils / File / Findutils / Gawk
-Grep / Gzip / M4 / Man-DB / Ncurses / Procps / Psmisc / Sed / Shadow
-Tar / Util-linux / Zlib
-&& Perl
+//////////////////////////////////////////////////////////////////////////////////////////
+\
+*
+/	- We will be following the linux standards as closely as possible, including the following:
+*	  > POSIX.1-2008
+\	  > Filesystem Hierarchy Standard 3.0
+*	  > Linux Standard Base Version 5
+/
+*	The latter of these has four standards: Core, Desktop, Runtime Languages and Imaging.
+\	The main need of LSB is to ensure that proprietary software can be installed and used.
+*	I will have a choice whether I want to install all packages specified by LSB.
+/	It will be likely that the resultant system in LFS will not pass LSB certifications; 
+*	this can be done with a BLFS ( your next project, lol )
+\
+*	Packages supplied by LFS to satisfy LSB:
+/	Bash / Bc / Binutils / Coreutils / Diffutils / File / Findutils / Gawk
+*	Grep / Gzip / M4 / Man-DB / Ncurses / Procps / Psmisc / Sed / Shadow
+\	Tar / Util-linux / Zlib
+*	&& Perl
+\
+//////////////////////////////////////////////////////////////////////////////////////////
 
 Plan:
 Uncle John's old gateway will be transformed into an LFS box :D
 
+===============
 About man pages
+===============
 When you see program(i)
 that means that there are multiple man pages for that program.
 Man pages are stashed at /usr/share/man/mani/program.i
 you can access a particular man page by saying man i program
+
+@!@ LFS SHOULD BE BUILT IN ONE SESSION @!@
+You shouldn't shut down your system. Certain procedures will have to be redone if this happens.
+
+Things I did:
+-> Made /bin/sh symlink to bash
+-> Checked versions of installed packages
