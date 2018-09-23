@@ -11,3 +11,8 @@ notes
 	sudo -i
 	mkdir -p /mnt/lfs
 	mount /dev/sdb1 /mnt/lfs
+
+IF YOU RESTART THE COMPUTER YOU ARE GOING TO HAVE TO REMOUNT
+OTHERWISE EVERYTHING WILL BE FUKKED
+You can also modify fstab to automaticcaly remount on boot, but that's dumb.
+We are NOT using a swap partition.
