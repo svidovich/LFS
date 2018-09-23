@@ -1,2 +1,13 @@
 Today we will be making the partition on which LFS will be store
 
+=====
+notes
+=====
+
+> EXT4 is rad because it has speed improvements, can handle really big files, and can make timestamps on the level of the very small. Rad!
+
+> Never forget to do export LFS=/mnt/lfs -- this will ensure that we can work in that directory until we unhook the os
+>> In order to mount lfs properly, we did the following:
+	sudo -i
+	mkdir -p /mnt/lfs
+	mount /dev/sdb1 /mnt/lfs
