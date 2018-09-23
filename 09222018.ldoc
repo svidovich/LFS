@@ -16,3 +16,9 @@ IF YOU RESTART THE COMPUTER YOU ARE GOING TO HAVE TO REMOUNT
 OTHERWISE EVERYTHING WILL BE FUKKED
 You can also modify fstab to automaticcaly remount on boot, but that's dumb.
 We are NOT using a swap partition.
+
+Next we are going to make a place to hold all of the package sources by doing
+	mkdir -v $LFS/sources
+	chmod -v a+wt $LFS/sources
+
+We are going to place all of the packages mentioned by the LFS book into this new directory!
