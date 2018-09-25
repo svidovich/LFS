@@ -33,4 +33,13 @@ makes bash lfs' default shell
 Prevent the copying of files from the skeleton directory by changing
 the input location to the null device.
 
+To log into the new user, give it a password.
 
+passwd lfs
+
+and give lfs access to $LFS/tools:
+chown -v lfs $LFS/tools
+chown -v lf $LFS/sources
+
+you can log in as lfs by saying
+su - lfs
