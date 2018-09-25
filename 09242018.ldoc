@@ -9,3 +9,28 @@ In order to create the temp directory, run these as root:
 
 This symlink makes it so our toolchain is compiled so that it always refers to /tools. Thus
 when we decouple the OS, things will still work.
+
+Next we are going to add a user. We can then build packages safely without ruining anything.
+Due to lack of creativity, we will call the user, as well as the group it belongs to, lfs.
+
+	sudo -i
+	groupadd lfs
+	useradd -s /bin/bash -g lfs -m -k /dev/null lfs
+	exit
+
+The book goes over these options:
+
+-g lfs
+add user lfs to group lfs
+
+-m
+creates a home directory for lfs
+
+-s /bin/bash
+makes bash lfs' default shell
+
+-k /dev/null
+Prevent the copying of files from the skeleton directory by changing
+the input location to the null device.
+
+
