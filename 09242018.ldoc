@@ -95,3 +95,15 @@ linuxfromscratch.org/lfs/faq.html#no-ptys
 
 Next time - CHAPTER 5: CONSTRUCTING A TEMPORARY SYSTEM
 
+Postscript: Fixing a symlink issue
+
+I kept getting the 'too many levels of symlinks' issue when trying to ls /tools, so I did
+
+sudo -i
+rm -rf /tools
+cd /mnt/lfs/tools
+ln -sv /mnt/lfs/tools /
+exit
+
+This cured my problem.
+
