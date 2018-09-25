@@ -65,3 +65,33 @@ export LFS LC_ALL LFS_TGT PATH
 
 see p31.
 To apply the changes, you can do source ~/.bash_profile.
+
+
+|||||||\\\\|||||||////|||||||
+           TRIVIA!
+|||||||////|||||||\\\\|||||||
+
+An SBU - standard build unit -
+is equal to the amount of time
+it takes for binutils to compile
+on your system!
+
+
+You can reduce compile time by using parallel make!!
+When you do make, just say 
+make -j2 ...
+This will fail sometimes :L
+
+\/\/\/\/ >>> HOT TIP <<< \/\/\/\/
+ ALWAYS RUN THE TEST SUITE THAT 
+ COMES WITH PACKAGES. IT WILL 
+ KEEP YOUR SYSTEM HEALTHY AND
+ SAFE.
+
+( except the ones from chapter 5 lmao )
+Tip for user-mode linux: check out devpts
+
+linuxfromscratch.org/lfs/faq.html#no-ptys
+
+Next time - CHAPTER 5: CONSTRUCTING A TEMPORARY SYSTEM
+
