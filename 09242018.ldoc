@@ -1,0 +1,11 @@
+We are moving on to chapter 4 today. We have all of the packages... around.
+We are going to create a directory for temporary tools, and add a user! We will
+construct an environment for the use to play in.
+
+In order to create the temp directory, run these as root:
+
+	mkdir -v $LFS/tools
+	ln -sv $LFS/tools /
+
+This symlink makes it so our toolchain is compiled so that it always refers to /tools. Thus
+when we decouple the OS, things will still work.
