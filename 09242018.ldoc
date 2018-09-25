@@ -43,3 +43,25 @@ chown -v lf $LFS/sources
 
 you can log in as lfs by saying
 su - lfs
+
+
+Next let's set up lfs with some deets!
+We will add some stuff for bash. As lfs@computer, do
+
+cat > ~/.bash_profile << "EOF"
+exec env -i HOME=$HOME TERM=$TERM PS1='\u:\w\$ ' /bin/bash
+EOF
+
+This will log lfs in with HOME, TERM and PS1, so environment variables from the outer system don't leak in!
+We can also set up a bash wreck if we like.
+
+set +h
+umask 022
+LFS=/mnt/lfs
+LC_ALL=POSIX
+LFS_TGT=$(uname -m)-lfs-linux-gnu
+PATH+/tools/bin:/bin:/usr/bin
+export LFS LC_ALL LFS_TGT PATH
+
+see p31.
+To apply the changes, you can do source ~/.bash_profile.
