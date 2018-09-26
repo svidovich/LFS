@@ -1,3 +1,32 @@
 Today we will begin install packages.
 
 #1: binutils
+
+We are going to need to time this one, since we want to have a metric for how long packages take to install.
+
+NOTE: Be careful setting up ~/.bashrc
+You should have
+
+           PATH=/tools/bin:/bin:/usr/bin
+
+If you don't, you'll notice that you need to say things like
+
+                  /bin/cat    /bin/ls
+
+We have confirmed that echo $LFS returns /mnt/lfs.
+It is time to continue. We checked last time that:
+
+> bash is the shell we are using
+> sh -> bash
+> /usr/bin/awk -> gawk
+> /usr/bin/yacc -> bison.yacc
+
+We have also confirmed that all of the sources are located in /mnt/lfs/sources and NOT in /mnt/lfs/tools.
+
+The steps for installation are as follows:
+a. Untar as lfs
+b. Change to the created folder
+c. Install as per instructions in the book
+d. Change back to /mnt/lfs/sources
+e. Delete the extracted source directory unless otherwise directed
+
