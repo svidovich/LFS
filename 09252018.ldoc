@@ -56,7 +56,13 @@ Findally, we are going to say
 
 It completed in a few moments, and seems to have been successful.
 
-My SBU is approximately 3 minutes.
+
+/////\\\\\||||||/////\\\\\|||||/////\\\\\|||||/////\\\\\
+|                                                      |
+|          My SBU is approximately 3 minutes.          |
+|                                                      |
+/////\\\\\||||||/////\\\\\|||||/////\\\\\|||||/////\\\\\
+
 
 # 2: Cross GCC
 
@@ -108,3 +114,5 @@ GCC wants a build directory, so issue
                       cd build
 
 The configuration command is... huge. Find it on page 40. You can see a description of all of the flags there, too.
+let's make.
+
