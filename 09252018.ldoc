@@ -1,10 +1,7 @@
 Today we will begin install packages.
 
-#1: binutils
 
-We are going to need to time this one, since we want to have a metric for how long packages take to install.
-
-NOTE: Be careful setting up ~/.bashrc
+NOTE FROM LAST TIME: Be careful setting up ~/.bashrc
 You should have
 
            PATH=/tools/bin:/bin:/usr/bin
@@ -30,3 +27,33 @@ c. Install as per instructions in the book
 d. Change back to /mnt/lfs/sources
 e. Delete the extracted source directory unless otherwise directed
 
+#1: binutils
+
+We are going to need to time this one, since we want to have a metric for how long packages take to install.
+
+Okay, so binutils documentation says making a binutils build directory.
+From inside the extracted source, I will say
+
+                 mkdir -v build
+                 cd build
+
+And then we can do
+
+../configure --prefix=/tools --with-sysroot=$LFS --with-lib-path=/tools/lib --target=$LFS_TGT --disable-nls --disable-werror
+This step took approximately 0:0:10
+
+Once that is done, we can say make.
+This step took approximately 0:2:38
+
+Next we will build a symlink to make sure the toolchain is sane. I don't know what that means, but it's because I'm running 64 bit. So I am going to do
+
+cast $(uname -m) in x86_64) mkdir -v /tools/lib && ln -sv lib /tools/lib64 ;; esac
+
+This seems to have been successful.
+Findally, we are going to say
+
+                         make install
+
+It completed in a few moments, and seems to have been successful.
+
+My SBU is approximately 3 minutes.
