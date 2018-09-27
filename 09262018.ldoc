@@ -39,3 +39,18 @@ We expected [Requesting program interpreter... ]
 
 And it's just what we got! yay!
 
+#4: Libstdc++ from GCC
+
+This depended on glibc, so we waited until now to prop it up. Since libstdc++ is part of gcc, we start in the gcc directory. We had deleted the folder prior, so we re-extract the tarball using -xJf, and then change into the directory.
+
+We also create a build directory.
+
+Next, we can prep:
+
+../libstdc++-v3/configure --host=$LFS_TGT --prefix=/tools --disable-multilib --disable-nls --disable-libstdcxx-threads --disable-libstdcxx-pch --with-gxx-include-dir=/tools/$LFS_TGT/include/c++/8.2.0
+
+We prevent installation of precompiled include files. We also cannot build the c++ threads library... since the c one hasn't been installed, either.
+
+We include the directory since we are not in a top level directory of the build setup.
+
+Let's make. That was easy!
