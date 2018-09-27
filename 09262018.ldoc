@@ -14,3 +14,28 @@ In order to extract user visible kernel headers, we will issue the following:
                 cp -rv dest/include/* /tools/include
 
 #3: Glibc
+
+We will start by untarring with -xJf since it is a tar.xz.
+Like binutils, we need a dedicated build directory, so we issue
+
+                mkdir -v build
+                cd build
+
+We prep using a long command
+
+../configure --prefix=/tools --host=$LFS_TGT --build=$(../scripts/config.guess) --enable-kernel=3.2 --with-headers=/tools/include libc_cv_forced_unwind=yes libc_cv_c_cleanup=yes
+
+DON'T worry about enable-kernel=3.2 : this just says we want to have support for kernel versions 3.2 and LATER.
+
+Forced unwind is used because binutils was cross-compiled. We can't use it until glibc is installed. Thus, we skip testing for forced unwind results in the configuration step.
+
+Configure success ( :
+
+We can make, and install now.
+
+The moment of truth comes next, when we test whether compiling and linking a basic C program functions or not.
+
+We expected [Requesting program interpreter... ]
+
+And it's just what we got! yay!
+
