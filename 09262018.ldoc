@@ -69,5 +69,34 @@ We can now make and install. After we do, we need to prep the linker for next ch
                      make -C ld LIB_PATH=/usr/lib:/lib
                      cp -v ld/ld-new /tools/bin
 
-This removed all of the compiled stuff from ld, and then rebuilt everything in the ld directory. 
+This removed all of the compiled stuff from ld, and then rebuilt everything in the ld directory.
 
+#6: GCC: The Return
+
+This takes up 3.4 fucking gigabytes.
+What the fuck.
+Anyway, the first install included some limited headers. A lot of things didn't exist before; we just got everything we needed to construct libc. We will now construct the rest of GCC.
+
+For the first few parts, redo everything up to creating a special build directory, including the untarring and renaming of mpfr, gmp, and mpc.
+
+Then, configure GCC in a new way:
+CC=$LFS_TGT-gcc CXX=$LFS_TGT-g++ AR=$LFS_TGT-ar RANLIB=$LFS_TGT-ranlib ../configure --prefix=/tools --with-local-prefix=/tools --with-native-system-header-dir=/tools/include --enable-languages=c,c++ --disable-libstdcxx-pch --disable-multilib --disable-bootstrap --disable-libgomp
+
+We disable bootstrap so that this doesn't take years by building itself multiple times, and comparing the builds.
+
+Next, let's make and install.
+
+Once installation is complete, we should make a symlink that will allow other C compilers to be installed.
+
+                    ln -sv gcc /tools/bin/cc
+
+Finally, sanity check by saying
+
+                    echo 'int main(){}' > dummy.c
+                    cc dummy.c
+                    readelf -l a.out | grep ': /tools'
+
+Yay! It worked <3!
+
+Cleanup! rm -v dummy.c a.out
+More tommorrow :3
