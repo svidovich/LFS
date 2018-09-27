@@ -1,0 +1,16 @@
+Today, we continue chapter 5.
+
+#5: Linux API Headers
+
+The Linux kernel has to expose an API for C to use. We will sanitize C header files shipped along with the kernel source ( linux-<version>.tar.xz  ).
+
+As usual, let's tar -xJf the tarball, and enter the directory. Then we can issue
+
+                              make mrproper
+
+In order to extract user visible kernel headers, we will issue the following:
+
+                make INSTALL_HDR_PATH=dest headers_install
+                cp -rv dest/include/* /tools/include
+
+#3: Glibc
