@@ -45,3 +45,14 @@ Finally, we can test! Sometimes this fails for no reason -- that is OK.
 
 This prevents installation of extra scripts.
 Done!
+
+#9: DejaGNU
+
+This has a framework for testing other programs.
+This one is easy. Extract, cd, then
+
+           ./configure --prefix=/tools
+           make install
+           make check
+
+Done!
