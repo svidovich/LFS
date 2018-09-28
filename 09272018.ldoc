@@ -67,3 +67,19 @@ echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
 
 Then configure with prefix /tools, make, make check, and make install.
 Done!
+
+#11: My Favorite! NCURSES
+
+We all know what ncurses does.
+Check that gawk is found first during configuration
+
+         sed -i s/mawk// configure
+
+
+Next, prep it as follows:
+
+         ./configure --prefix=/tools --with-shared --without-debug --without-ada --enable-widec --enable-overwrite
+
+Enable overwrite just says that we should install to /tools/include so that everyone else can find ncurses. Without ada says that we don't care about ada compiler support. That becomes important when we chroot!
+Make, then make install.
+Done!
