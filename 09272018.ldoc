@@ -1,0 +1,22 @@
+Today we will install a bunch of packages. I don't think it will take very long.
+
+#7: Tcl
+
+This is the tool command language. This and the next couple are to support running test suites. This is a minimal version.
+
+To configure here, we do
+
+           cd unix
+           ./configure --prefix=/tools
+           make
+           make install
+           chmod -v u+w /tools/lib/libtcl8.6.so
+
+Expect, our next package, needs the Tcl headers. So, do
+
+           make install-private-headers
+
+and build a symbolic link:
+
+           ln -sv tclsh8.6 /tools/bin/tclsh
+And it's done!
