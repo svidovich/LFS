@@ -83,3 +83,21 @@ Next, prep it as follows:
 Enable overwrite just says that we should install to /tools/include so that everyone else can find ncurses. Without ada says that we don't care about ada compiler support. That becomes important when we chroot!
 Make, then make install.
 Done!
+
+#12: Bash Himself
+
+Wow, neat!
+
+Do
+
+          ./configure --prefix=/tools --without-bash-malloc
+
+malloc is taken from glibc, which is more stable.
+
+Next,
+
+          make
+          make install
+          ln -sv bash /tools/bin/sh
+
+That way instead of using sh we will always have bash to have and to hold.
