@@ -56,3 +56,14 @@ This one is easy. Extract, cd, then
            make check
 
 Done!
+
+
+#10: M4
+
+This has a macro processor. We have to make some fixes as required by glibc.
+
+sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
+echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
+
+Then configure with prefix /tools, make, make check, and make install.
+Done!
