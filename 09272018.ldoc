@@ -20,3 +20,28 @@ and build a symbolic link:
 
            ln -sv tclsh8.6 /tools/bin/tclsh
 And it's done!
+
+#8: Install Expect
+
+We want Expect's configure script to use /bin/stty instead of the host.
+
+              cp -v configure{,.orig}
+              sed 's:/usr/local/bin:/bin:' configure.orig > configure
+
+And prep it:
+
+              ./configure --prefix=/tools --with-tcl=/tools/lib --with-tclinclude=/tools/include
+
+With tcl include tells expect where it can find tcl's headers. This prevents failure due to automated detection of the location of the headers.
+
+Next, do
+
+               make
+               make test
+
+Finally, we can test! Sometimes this fails for no reason -- that is OK.
+
+               make SCRIPTS="" install
+
+This prevents installation of extra scripts.
+Done!
