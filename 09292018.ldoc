@@ -73,3 +73,16 @@ Then, in order to make,
 This compiles just three programs. Install them:
 
         cp -v src/{msgfmt,msgmerge,xgettext} /tools/bin
+
+#21: Grep
+
+Woo! Cool!
+
+Configure with prefix tools, make, make check, make install.
+I got the following:
+Recipe for check-tests failed
+recipe for check-am failed
+recipe for check-recursive failed
+1 Xpass
+1 Xfail
+o.o
