@@ -41,3 +41,7 @@ We then only need a couple of utilities and libraries --
 
 NOTE: the numbers depend on the version you are installing!
 
+#27: sed
+
+This is a stream editor.
+Business as usual!
