@@ -86,3 +86,13 @@ recipe for check-recursive failed
 1 Xpass
 1 Xfail
 o.o
+
+
+#22: Gzip
+
+We all know what this does! This needs some changes thanks to glibc:
+
+	sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
+	echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
+
+After that, the usual.
