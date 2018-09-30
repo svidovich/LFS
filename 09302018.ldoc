@@ -51,3 +51,9 @@ Business as usual!
 The original tape archive program!
 Business as usual.
 Interesting, though, to untar tar.
+
+#29: Texinfo
+
+This package contains programs regarding info pages.
+Don't worry about the error about TestXS_la-TestXS.lo. It is not important.
+Otherwise, business as usual.
