@@ -11,5 +11,8 @@ To configure, issue
 
 Guile may be available on host, but won't be in the chroot environment. Skip em.
 
+#25: Patch
 
+This allows us to modify / craete files by applying a patch created by diff.
+Business as usual here!
 
