@@ -67,3 +67,8 @@ We can prep it as such:
 ./configure --prefix=/tools --without-python --disable-makeinstall-chown --without-systemdsystemunitdir --without-ncurses PKG_CONFIG=""
 
 The options are self explanatory. After that, just make and make install.
+
+# 31: XZ
+
+This is a file xompressor. Yo!
+Business as usual.
