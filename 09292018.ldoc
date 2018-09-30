@@ -10,3 +10,13 @@ Configure with prefix /tools, make, make check, and make install.
 This one has no configure script. We can compile and test with make, then
 
                      make PREFIX=/tools install
+
+#15: Coreutils
+
+This package has utilities for showing and setting system characteristics. In order to configure it, we will do
+
+            ./configure --prefix=/tools --enable-install-program=hostname
+
+This will allow the hostname binary to be built and installed. This is required by Perl's test suite.
+
+Once this step is complete, we can say make, make check ( with option RUN_EXPENSIVE_TESTS=yes as desired ) and then make install.
