@@ -1,0 +1,15 @@
+#24: Make
+
+This one is weird. I am going to make make.
+First, fix an error caused by glibc ( THANKS GLIBC )
+
+	sed -i '211,217 d; 219,229 d; 232 d' glob/glob.c
+
+To configure, issue
+
+	./configure --prefix=/tools --without-guile
+
+Guile may be available on host, but won't be in the chroot environment. Skip em.
+
+
+
