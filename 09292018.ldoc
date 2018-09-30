@@ -34,3 +34,15 @@ This allows us to determine the type of a given file or files!
 
 Configure with prefix /tools, make, make check, and make install.
 
+
+#18: Finutils
+
+This contains programs to find files. They recursively search through directories.
+
+This one is more of a challenge. Glibc requires some changes:
+
+	sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' gl/lib/*.c
+	sed -i '/unistd/a #include <sys/sysmacros.h>' gl/lib/mountlist.c
+	echo "#define _IO_IN_BACKUP 0x100" >> gl/lib/stdio-impl.h
+
+From there, make, make check and make install.
