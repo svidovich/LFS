@@ -46,3 +46,9 @@ This one is more of a challenge. Glibc requires some changes:
 	echo "#define _IO_IN_BACKUP 0x100" >> gl/lib/stdio-impl.h
 
 From there, make, make check and make install.
+
+#19: Gawk
+
+We know what this one does.
+Configure with prefix tools, make, make check, then make install.
+I got recipe for recursive failed. Hopefully that doesn't come back to bite me...
