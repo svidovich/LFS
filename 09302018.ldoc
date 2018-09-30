@@ -16,3 +16,28 @@ Guile may be available on host, but won't be in the chroot environment. Skip em.
 This allows us to modify / craete files by applying a patch created by diff.
 Business as usual here!
 
+#26: Perl
+
+Practical Extraction and Report Language
+
+This one is... odd. let's configure first:
+
+	sh Configure -des -Dprefix=/tools -Dlibs=-lm -Uloclibpth -Ulocincpth
+
+What the fuck
+
+des: default for all items / completion of all tasks / silence non-essential output
+
+Uloc... undefine variables that cause the configuration to search for installed components on the host.
+
+
+After that, run make.
+
+We then only need a couple of utilities and libraries --
+
+	cp -v perl cpan/podlators/scripts/pod2man /tools/bin
+	mkdir -pv /tools/lib/perl5/5.28.0
+	cp -Rv lib/* /tools/lib/perl5/5.28.0
+
+NOTE: the numbers depend on the version you are installing!
+
