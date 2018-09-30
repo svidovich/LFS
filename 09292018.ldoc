@@ -28,5 +28,9 @@ Once this step is complete, we can say make, make check ( with option RUN_EXPENS
 This allows us to show the differences between files and directories.
 This one is easy: Configure with prefix tools, make, make check, and make install.
 
+#17: File
 
+This allows us to determine the type of a given file or files!
+
+Configure with prefix /tools, make, make check, and make install.
 
