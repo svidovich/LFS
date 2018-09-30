@@ -57,3 +57,13 @@ Interesting, though, to untar tar.
 This package contains programs regarding info pages.
 Don't worry about the error about TestXS_la-TestXS.lo. It is not important.
 Otherwise, business as usual.
+
+#30: Util-linux
+
+This contains many utility programs.
+
+We can prep it as such:
+
+./configure --prefix=/tools --without-python --disable-makeinstall-chown --without-systemdsystemunitdir --without-ncurses PKG_CONFIG=""
+
+The options are self explanatory. After that, just make and make install.
