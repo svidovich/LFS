@@ -52,3 +52,24 @@ From there, make, make check and make install.
 We know what this one does.
 Configure with prefix tools, make, make check, then make install.
 I got recipe for recursive failed. Hopefully that doesn't come back to bite me...
+
+#20: Gettext
+
+This one lets programs compile with native language support, so that we can use many languages on our computer.
+
+We only need to build and install three programs from gettext:
+
+        cd gettext-tools
+        EMACS="no" ./configure --prefix=/tools --disable-shared
+
+Then, in order to make, 
+
+        make -C gnulib-lib
+        make -C intl pluralx.c
+        make -C src msgfmt
+        make -C src msgmerge
+        make -C src xgettext
+
+This compiles just three programs. Install them:
+
+        cp -v src/{msgfmt,msgmerge,xgettext} /tools/bin
