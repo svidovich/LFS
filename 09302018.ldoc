@@ -72,3 +72,16 @@ The options are self explanatory. After that, just make and make install.
 
 This is a file xompressor. Yo!
 Business as usual.
+
+
+
+/////\\\\\||||||/////\\\\\|||||/////\\\\\|||||/////\\\\\
+                 ! TOOLCHAIN COMPLETE !
+/////\\\\\||||||/////\\\\\|||||/////\\\\\|||||/////\\\\\
+
+We need to change ownership. In another terminal...
+
+	sudo -i
+	chown -R root:root /mnt/lfs/tools
+
+Now, it is time to build the LFS system c:
