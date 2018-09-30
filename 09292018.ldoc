@@ -4,3 +4,9 @@ let's continue!
 
 This package contains a parser generator.
 Configure with prefix /tools, make, make check, and make install.
+
+#14: Bzip
+
+This one has no configure script. We can compile and test with make, then
+
+                     make PREFIX=/tools install
