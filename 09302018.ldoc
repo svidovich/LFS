@@ -113,3 +113,36 @@ Now we are ready to mount the virtual kernel filesystems!
 	mount -vt proc proc $LFS/proc
 	mount -vt sysfs sysfs $LFS/sys
 	mount -vt tmpfs tmpfs $LFS/run
+
+Check if /dev/shm is a symlink to /run/shm; if so, make a directory:
+
+if [ -h $LFS/dev/shm ]; then
+	mkdir -pv $LFS/$(readlink $LFS/dev/shm)
+fi
+
+Regarding package management:
+> Probably don't upgrade glibc unless you want to just rebuilds LFS.
+> If you update a package containing a shared library, you will need to recompile all of the packages that are dynamically linked to that library. Bummer.
+
+If you want to manage packages yourself, consider installing them in separate directories -- for example, package foo-1.0 is installed in /usr/pkg/foo-1.0. 
+A symlink is made from /usr/pkg/foo to /usr/pkg/foo-1.0. When installing foo-1.1, he is installed in /usr/pkg/foo-1.1, and a new symlink is made.
+If you have more than a few packages, this sucks.
+
+Package archives are used by most package managers. Each package is faked into a separate tree. Adopting this style is possible -- see
+
+linuxfromscratch.org/hints/downloads/files/fakeroot.txt
+
+There are more methods found in chapter 6.
+
+
+/////\\\\\||||||/////\\\\\|||||/////\\\\\|||||/////\\\\\
+                   Deploying Elsewhere
+/////\\\\\||||||/////\\\\\|||||/////\\\\\|||||/////\\\\\
+
+By its nature, LFS can be cloned to any system with the same architecture
+on the one with which it was built! You can tar on the LFS partition containing
+the root directory, then expand it to a new system. A few things need to be
+updated --
+hosts fstab passwd group shadow ld.so.conf sysconfig/rc.site sysconfig/network
+sysconfig/ifocnfig.eth0
+You may also need to build a custom kernel as well.
