@@ -146,3 +146,18 @@ updated --
 hosts fstab passwd group shadow ld.so.conf sysconfig/rc.site sysconfig/network
 sysconfig/ifocnfig.eth0
 You may also need to build a custom kernel as well.
+
+
+
+/////\\\\\||||||/////\\\\\|||||/////\\\\\|||||/////\\\\\
+                          CHROOT
+/////\\\\\||||||/////\\\\\|||||/////\\\\\|||||/////\\\\\
+
+We will be able to build the system now. Let's enter.
+chroot "$LFS" /tools/bin/env -i HOME=/root TERM="$TERM" PS1='(lfs chroot) \u:\w\$ ' PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin /tools/bin/bash --login +h
+
+It is normal to have it say I have no name!
+This is because no passwd has been created. We no longer need the $LFS variable,
+since all work we're doing will now be on the LFS filesystem.
+Since /tools/bin is last, any temporary tool will not be used once its final version is installed.
+IF YOU HAVE TO SHUT DOWN, MOUNT THE VIRTUAL KERNEL FILE SYSTEMS AND CHROOT AGAIN BEFORE CONTINUING
