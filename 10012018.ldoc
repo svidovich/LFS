@@ -142,3 +142,16 @@ Apparently I had installed grep improperly. The file grep did not exist in
 /tools/bin/, so what I did was copy the grep file from /sources/grep-3.1/src/ into that
 directory.
 I can't believe that fucking worked.
+Fuckin shaken right now, if you're reading this please don't be a fuckup like me, install your shit properly.
+
+Anyway, we need to extract the user-visible headers from the source. 
+We place them in an intermediate directory because this process is fucked up and deletes anything in the target directory ( wtf ??? ??? ??? )
+
+	make INSTALL_HDR_PATH=dest headers_install
+	find dest/include \( -name .install -o -name ..install.cmd \) -delete
+	cp -rv dest/include/* /usr/include
+
+I fucked up that second command by not running it with -delete the first time.
+I really hope that does not bite me later.
+These headers install important assembly bullshit. Lol great thing to fuck up.
+Let's install 2200 man pages and get the fuck out for the night.
