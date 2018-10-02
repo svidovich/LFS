@@ -126,3 +126,19 @@ wtmp records logins / logouts
 lastlog records when each user last logged in
 faillog records failed login attempts
 btmp records bad login attempts.
+
+Let's build.
+
+= 6.7: Linux API Headers =
+
+The kernel needs to expose and API for system C to use. We can sanitize C headers that are
+shipped along with the linux kernel source tarball!
+
+Let's go into the extracted kernel and make mrproper to remove any footprints we left behind...
+
+	make mrproper
+
+Apparently I had installed grep improperly. The file grep did not exist in
+/tools/bin/, so what I did was copy the grep file from /sources/grep-3.1/src/ into that
+directory.
+I can't believe that fucking worked.
