@@ -21,3 +21,29 @@ Directories are created with permission 755. Those for which other permissions
 are desired are changed in the previous commands set -- not anyone can enter
 /root, and any user can write to /tmp and /var/tmp, but cannot remove others'
 files from them. That part is from the 1 in 1777.
+
+Next we need some essential files and symlinks. Some programs use hard-writed paths that don't yet exist.
+Let's make them in advance.
+
+ln -sv /tools/bin/{bash,cat,dd,echo,ln,pwd,rm,stty} /bin
+ln -sv /tools/bin/{env,install,perl} /usr/bin
+ln -sv /tools/lib/libgcc_s.so{,.1} /usr/lib
+ln -sv /tools/lib/libstdc++.{a,so{,.6}} /usr/lib
+for lib in blkid lzma mount uuid
+do
+	ln -sv /tools/lib/lib$lib.so* /usr/lib
+done
+ln -svf /tools/include/blkid
+/usr/include
+ln -svf /tools/include/libmount /usr/include
+ln -svf /tools/include/uuid
+/usr/include
+install -vdm755 /usr/lib/pkgconfig
+for pc in blkid mount uuid
+do
+	sed 's@tools@usr@g' /tools/lib/pkgconfig/${pc}.pc \
+	> /usr/lib/pkgconfig/${pc}.pc
+done
+ln -sv bash /bin/sh
+
+The reasoning behind each of these links is given on page 106 in the book.
