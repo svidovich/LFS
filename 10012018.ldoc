@@ -112,3 +112,17 @@ executed.
                    I am truly root.
 /////\\\\\||||||/////\\\\\|||||/////\\\\\|||||/////\\\\\
 
+Next, we want login, agetty and init. They use log files to record information,
+like who was logged in and when. They won't write to logs if they don't exist... duh.
+Let's initialize to log files and give them the right permissions so they can
+be modified and etc.
+
+	touch /var/log/{btmp,lastlog,faillog,wtmp}
+	chgrp -v utmp /var/log/lastlog
+	chmod -v 664 /var/log/lastlog
+	chmod -v 600 /var/log/btmp
+
+wtmp records logins / logouts
+lastlog records when each user last logged in
+faillog records failed login attempts
+btmp records bad login attempts.
