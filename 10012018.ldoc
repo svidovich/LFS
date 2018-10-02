@@ -47,3 +47,68 @@ done
 ln -sv bash /bin/sh
 
 The reasoning behind each of these links is given on page 106 in the book.
+
+
+//
+The list of mounted file systems are in /etc/mtab; newer kernels keep this list 
+internally and expose it to the user via /proc. Let's make a symlink to keep
+legacy utilities happy.
+
+	ln -sv /proc/self/mounts /etc/mtab
+
+
+Next, so that root can log in and so that root is recognized as a name, we must
+construct it in /etc/passwd and in /etc/group:
+
+	cat > /etc/passwd << "EOF"
+	root:x:0:0:root:/root:/bin/bash
+	bin:x:1:1:bin:/dev/null:/bin/false
+	daemon:x:6:6:Daemon User:/dev/null:/bin/false
+	messagebus:x:18:18:D-Bus Message Daemon User:/var/run/dbus:/bin/false
+	nobody:x:99:99:Unprivileged User:/dev/null:/bin/false
+	EOF
+
+That created some users. Now, let's make the group:
+
+	cat > /etc/group << "EOF"
+	root:x:0:
+	bin:x:1:daemon
+	sys:x:2:
+	kmem:x:3:
+	tape:x:4:
+	tty:x:5:
+	daemon:x:6:
+	floppy:x:7:
+	disk:x:8:
+	lp:x:9:
+	dialout:x:10:
+	audio:x:11:
+	video:x:12:
+	utmp:x:13:
+	usb:x:14:
+	cdrom:x:15:
+	adm:x:16:
+	messagebus:x:18:
+	systemd-journal:x:23:
+	input:x:24:
+	mail:x:34:
+	nogroup:x:99:
+	users:x:999:
+	EOF
+
+These are not part of a standard. They are decided by the requirements of the
+UDEV config in ch6, and by common conventions elsewhere decided.
+LSB doesn't say a lot about these -- just that root and bin need to be there.
+Now that everything exists, let's start up a new shell. We have full glibc,
+and the passwd and group files exist... so this should work, right?
+
+exec /tools/bin/bash --login +h
+
+We don't want to use path hashing -- we want no memory of paths to binaries
+executed.
+
+/////\\\\\||||||/////\\\\\|||||/////\\\\\|||||/////\\\\\
+                 For the first time,
+                   I am truly root.
+/////\\\\\||||||/////\\\\\|||||/////\\\\\|||||/////\\\\\
+
