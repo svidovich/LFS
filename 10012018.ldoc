@@ -155,3 +155,12 @@ I fucked up that second command by not running it with -delete the first time.
 I really hope that does not bite me later.
 These headers install important assembly bullshit. Lol great thing to fuck up.
 Let's install 2200 man pages and get the fuck out for the night.
+
+= 6.8: Man-pages =
+
+I'll do 
+	tar -xJf man-pages-4.16.tar.xz
+	cd man-pages-4.16.tar.xz
+	make install
+
+Sweet lord get me tf out of here before I trash the joint further.
