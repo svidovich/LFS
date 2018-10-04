@@ -45,3 +45,5 @@ The stack protector adds extra code to check for buffer overflows.
 You MUST test. Do make check. It is CRITICAL.
 I got a couple of errors making. Double check your symlinks.
 I was also missing fgrep, so I performed the 'copy-from-source' trick.
+
+After 35 minutes, make check is still running. Time for bed!
