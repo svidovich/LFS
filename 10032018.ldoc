@@ -1,0 +1,47 @@
+Let's continue!
+
+= 6.9: Glibc =
+
+This contains the main C library, which allows us to allocate memory, search directories, open and close files, and more.
+
+This will take forever. 
+
+Glibc is self contained and installs great even though the compiler specs file and linker are pointing at /tools.
+
+First, we need to patch glibc to stay FHS compliant.
+
+	patch -Np1 -i ../glibc-2.28-fhs-1.patch
+
+Create a compatability symlink to avoid /tools refs!
+
+	ln -sfv /tools/lib/gcc /usr/lib
+
+Determine the GCC include directory. Create a symlink for LSB compliance. Since we are 64 bit, make a symlink for the dynamic loader.
+
+case $(uname -m) in
+	i?86) GCC_INCDIR=/usr/lib/gcc/$(uname -m)-pc-linux-gnu/8.2.0/include
+		ln -sfv ld-linux.so.2 /lib/ld-lsb.so.3
+	;;
+	x86_64) GCC_INCDIR=/usr/lib/gcc/x86_64-pc-linux-gnu/8.2.0/include
+		ln -sfv ../lib/ld-linux-x86-64.so.2 /lib64
+		ln -sfv ../lib/ld-linux-x86-64.so.2 /lib64/ld-lsb-x86-64.so.3
+	;;
+esac
+
+Note: If /usr/include/limits.h exists ( if the limit exists ) delete it.
+
+now, we want a build directory, so mkdir -v build and cd build.
+
+We can finally configure!
+
+CC="gcc -isystem $GCC_INCDIR -isystem /usr/include" ../configure --prefix=/usr --disable-werror --enable-kernel=3.2 --enable-stack-protector=strong libc_cv_slibdir=/lib 
+
+unset GCC_INCDIR
+
+setting the isystem allows us to set the location of gcc and system include directories. This avoids invalid paths when debugging.
+
+The stack protector adds extra code to check for buffer overflows.
+
+You MUST test. Do make check. It is CRITICAL.
+I got a couple of errors making. Double check your symlinks.
+I was also missing fgrep, so I performed the 'copy-from-source' trick.
