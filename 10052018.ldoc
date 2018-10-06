@@ -85,3 +85,23 @@ ethers: files
 rpc: files
 # End /etc/nsswitch.conf
 EOF
+
+Next, add timezone data. The commands are complex, so they are not included here. See page 116.
+
+A few of them are:
+
+zic -L /dev/null
+This creates posix time zones, without leapseconds.
+zic -L leapseconds
+This creates timezones with leap seconds.
+zic ... -p ...
+This makes the posix rules file.
+
+
+Create /etc/localtime:
+
+cp -v /usr/share/zoneinfo/America/New_York /etc/localtime
+
+Good!
+
+
