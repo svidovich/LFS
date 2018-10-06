@@ -104,4 +104,20 @@ cp -v /usr/share/zoneinfo/America/New_York /etc/localtime
 
 Good!
 
+Next, we configure the dynamic loader.
+We want to configure /etc/ld.so.conf so that it includes more places to look for libraries, namely /usr/local/lib and /opt/lib.
+EZ:
 
+cat > /etc/ld.so.conf << "EOF"
+# Begin /etc/ld.so.conf
+/usr/local/lib
+/opt/lib
+# Add include directory
+include /etc/ld.so.conf.d/*.conf
+EOF
+
+mkdir -pv /etc/ld.so.conf.d
+
+GLIBC COMPLETE
+
+HOPEFULLY!
