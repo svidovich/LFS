@@ -12,3 +12,27 @@ PS1='(lfs chroot) \u:\w\$ ' \
 PATH=/bin:/usr/bin:/sbin:/usr/sbin:/tools/bin \
 /tools/bin/bash --login +h
  And we're in!
+
+When we talked last, I had just done
+
+	make check
+
+We have a few more tasks before we can install.
+So glibc isn't a whiner on install:
+
+	touch /etc/ld.so.conf
+
+Fix up the makefile to skip a sanity check:
+
+sed '/test-installation/s@$(PERL_@echo not running@' -i ../Makefile
+
+Then, make install.
+
+When installing, I got errors about manual not being able to install. Specifically,
+
+make[1]: *** [Makefile:258: manual/subdir_install] Error 2
+
+I am going to start the build of glibc over.
+YEET. IT WORKED. Don't forget the symlink from /usr/lib -> /tools/lib/gcc
+
+We should install the config file and runtime dir for nscd, a daemon that provides a cache for common name service requests.
