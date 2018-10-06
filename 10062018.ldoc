@@ -1,0 +1,57 @@
+= 6.10: Toolchain Adjustments =
+
+We need to adjust the toolchain so that it links newly compiled programs against the C libraries.
+
+Back up the /tools linker and replace it with the adjusted linker from chapter 5.
+
+mv -v /tools/bin/{ld,ld-old}
+mv -v /tools/$(uname -m)-pc-linux-gnu/bin/{ld,ld-old}
+mv -v /tools/bin/{ld-new,ld}
+ln -sv /tools/bin/ld /tools/$(uname -m)-pc-linux-gnu/bin/ld
+
+Now we ammend GCC specs file so it points to the new dynamic linker.
+
+gcc -dumpspecs | sed -e 's@/tools@@g' \
+-e '/\*startfile_prefix_spec:/{n;s@.*@/usr/lib/ @}' \
+-e '/\*cpp:/{n;s@$@ -isystem /usr/include@}' > \
+`dirname $(gcc --print-libgcc-file-name)`/specs
+
+We do a sanity check.
+echo 'int main(){}' > dummy.c
+cc dummy.c -v -Wl,--verbose &> dummy.log
+readelf -l a.out | grep ': /lib'
+
+It works c:
+
+Are we set up to use the right start files?
+grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log
+
+yes c:
+
+Are we looking for the right headers?
+grep -B1 '^ /usr/include' dummy.log
+
+Yes!
+
+Is the new linker being used with the right search paths?
+
+grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g'
+
+YES!!
+
+Are we using the right libc?
+
+Oh YEAH!!!
+
+Is gcc using the right dynamic linker???
+
+grep found dummy.log
+
+OH YEAHHHHH! YEAH BABY!
+
+
+Clean up time :3
+
+rm -v dummy.c a.out dummy.log
+
+Next time... we install real packages :3
