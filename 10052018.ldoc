@@ -64,3 +64,24 @@ localedef -i ru_RU -f KOI8-R ru_RU.KOI8-R
 localedef -i ru_RU -f UTF-8 ru_RU.UTF-8
 localedef -i tr_TR -f UTF-8 tr_TR.UTF-8
 localedef -i zh_CN -f GB18030 zh_CN.GB18030
+
+
+As a result of our actions, glibc uses libidn2 when resolving internationalized domain names. Need it? Check out BLFS.
+
+We now need to configure glibc.
+
+Add /etc/nsswitch.conf -- 
+
+cat > /etc/nsswitch.conf << "EOF"
+# Begin /etc/nsswitch.conf
+passwd: files
+group: files
+shadow: files
+hosts: files dns
+networks: files
+protocols: files
+services: files
+ethers: files
+rpc: files
+# End /etc/nsswitch.conf
+EOF
