@@ -184,3 +184,42 @@ dc a reverse-polish command line calculator
 lmao what
 
 anyway, done!
+
+= 6.16: Binutils =
+This is a big one, and takes some time.
+It has a linker, an assembler, and more.
+
+First, verify PTYs are working in chroot.
+
+expect -c "spawn ls"
+
+Unfortunately, I need more ptys.
+
+Fuck.
+NO MATTER,
+Let's try
+http://www.linuxfromscratch.org//lfs/faq.html#no-ptys
+WAIT.
+Before you do that,
+try and exit chroot, remount the virtual filesystems, and then chroot back in. It worked for me.
+
+After that, let's do
+mkdir -v build && cd build
+
+Let's configure, installing the gold linker.
+
+../configure --prefix=/usr --enable-gold --enable-ld=default --enable-plugins --enable-shared --disable-werror --enable-64-bit-bfd --with-system-zlib
+
+Next let us say
+make tooldir=/usr
+
+Since this is a custom system, we are not cross compiling. Tooldir is where executables will be set.
+
+We MUST run the test suite. debug_msg.sh is a known fail hag.
+
+make -k check
+
+Once that is done, say
+make tooldir=/usr/install
+
+And done! Strings comes with this c:
