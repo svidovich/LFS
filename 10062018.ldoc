@@ -135,3 +135,52 @@ make install
 
 m4 copies given files while expanding the macros they contain. It also has built in functions for including
 named files, running unix commands, and more. This can be used as a front end to a compiler as desired.
+
+
+= 6.15: bc =
+
+This has an arbitrary precision numeric processing language.
+
+We need to make it so that it uses sed instead of ed.
+Wow.
+
+cat > bc/fix-libmath_h << "EOF"
+#! /bin/bash
+sed -e '1 s/^/{"/' \
+	-e 's/$/",/' \
+	-e '2,$ s/^/"/' \
+	-e '$ d' \
+	-i libmath.h
+sed -e '$ s/$/0}/' \
+	-i libmath.h
+EOF
+
+Create temporary symlinks so that the package can find and confirm readline's libncurses.
+
+ln -sv /tools/lib/libncursesw.so.6 /usr/lib/libncursesw.so.6
+
+ln -sfv libncurses.so.6 /usr/lib/libncurses.so
+
+There is an issue in configure. There were missing files early on. Let's fix it:
+sed -i -e '/flex/s/as_fn_error/: ;; # &/' configure
+
+Now configure thus:
+
+./configure --prefix=/usr --with-readline --mandir=/usr/share/man --infodir=/usr/share/info
+
+make
+
+To check, you can do
+
+echo "quit" | ./bc/bc -l Test/checklib.b > result.out
+
+No failures. Let's
+
+make install
+
+Now we have
+bc a command line calculator
+dc a reverse-polish command line calculator
+lmao what
+
+anyway, done!
