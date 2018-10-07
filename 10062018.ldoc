@@ -55,3 +55,21 @@ Clean up time :3
 rm -v dummy.c a.out dummy.log
 
 Next time... we install real packages :3
+
+Welcome back!
+
+= 6.11: zlib =
+This has compression and decompression routines.
+
+./configure --prefix=/usr
+
+make
+make check
+make install
+
+Now, the shared lib needs to be moved to /lib, so .so in /usr/lib needs recreated.
+
+mv -v /usr/lib/libz.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
+Done!
+
