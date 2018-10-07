@@ -118,3 +118,20 @@ install -v -m644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-7.0
 
 
 Done!
+
+
+= 6.14: M4 =
+
+We need to make some changes, thanks to glibc.
+sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
+echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
+
+Good. now,
+
+./configure --prefix=/usr
+make
+make check
+make install
+
+m4 copies given files while expanding the macros they contain. It also has built in functions for including
+named files, running unix commands, and more. This can be used as a front end to a compiler as desired.
