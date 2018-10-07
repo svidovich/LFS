@@ -84,3 +84,37 @@ make check
 make install
 
 Done!
+
+= 6.13: Readline =
+
+This allows command-line editing and history capabilities.
+Reinstalling this will cause old libs to be moved to libname.old. 
+Normally this isn't an issue... but it may causea a linking bug in ldconfig. Avoid this by issuing some seds.
+
+sed -i '/MV.*old/d' Makefile.in
+sed -i '/{OLDSUFF}/c:' support/shlib-install
+
+Next, let's configure.
+./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/readline-7.0
+
+Next, compile the package, forcing readline to link against the libncursesw library:
+
+make SHLIB_LIBS="-L/tools/lib -lncursesw"
+Install the package:
+make SHLIB_LIBS="-L/tools/lib -lncursesw" install
+
+I THINK the fact that it says 'you may need to run ldconfig' is okay. It does not seem to be and error.
+
+Next, let's move the dynamic libraries, and fix permissions, and do some symlinks.
+
+mv -v /usr/lib/lib{readline,history}.so.* /lib
+chmod -v u+w /lib/lib{readline,history}.so.*
+ln -sfv ../../lib/$(readlink /usr/lib/libreadline.so) /usr/lib/libreadline.so
+ln -sfv ../../lib/$(readlink /usr/lib/libhistory.so ) /usr/lib/libhistory.so
+
+Install the documentation, dick.
+
+install -v -m644 doc/*.{ps,pdf,html,dvi} /usr/share/doc/readline-7.0
+
+
+Done!
