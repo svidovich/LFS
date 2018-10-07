@@ -73,3 +73,14 @@ mv -v /usr/lib/libz.so.* /lib
 ln -sfv ../../lib/$(readlink /usr/lib/libz.so) /usr/lib/libz.so
 Done!
 
+= 6.12: File =
+This contains utils for telling what type of file a file is.
+
+Contains libmagic.
+
+./configure --prefix=/usr
+make
+make check
+make install
+
+Done!
