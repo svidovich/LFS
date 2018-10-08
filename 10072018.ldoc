@@ -50,4 +50,20 @@ make install-html
 
 Done!
 
+= 6.19: MPC =
 
+So we can use complex numbers.
+
+Configure like
+
+./ configure --prefix=/usr --disable-static --docdir=/usr/share/doc/mpc-1.1.0
+
+Then,
+make
+make html
+make check
+Yay! All tests pass!
+make install
+make install-html
+
+Done!
