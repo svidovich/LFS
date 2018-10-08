@@ -1,0 +1,38 @@
+= 6.17: GMP =
+
+This does math c:
+
+Since I would like this to be a generic install and not optimized for any particular processor, I am going
+to make some configurations in the following way:
+
+cp -v configfsf.guess config.guess
+cp -v configfsf.sub config.sub
+
+Configure as follows:
+
+./configure --prefix=/usr --enable-cxx --disable-static --docdir=/usr/share/doc/gmp-6.1.2
+
+This will enable C++ support, and specify a directory for the documentation.
+
+Then,
+
+make
+make html ( this generates html documentation )
+make check 2>&1 | tee gmp-check-log
+
+
+190 tests should pass. Check the results thus:
+
+awk '/# PASS:/{total+=$3} ; END{print total}' gmp-check-log
+
+Yay!
+Next,
+
+make install
+make install-html
+
+Done!
+
+mv
+mv
+ln
