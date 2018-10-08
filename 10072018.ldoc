@@ -33,6 +33,21 @@ make install-html
 
 Done!
 
-mv
-mv
-ln
+= 6.18 : MPFR =
+
+Multiple precision math functions!
+
+configure as such:
+
+./configure --prefix=/usr --disable-static --enable-thread-safe --docdir=/usr/share/doc/mpfr-4.0.1
+
+make
+make html
+make check
+All tests passed!
+make install
+make install-html
+
+Done!
+
+
