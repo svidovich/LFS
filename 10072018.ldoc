@@ -117,3 +117,37 @@ There are special things to know about shadow. See p119.
 Create a password for root. Mine will be toor.
 
 Done!
+
+= 6.21: GCC, fucking again =
+Wow. What the fuck, over. This will take OVER THREE HOURS.
+
+Since we're 64 bit, change the lib name to lib:
+
+sed -r '/m64=/s/lib64/lib/' -i.orig gcc/config/i386/t-linux64
+
+Remove the symlink created earlier. The final gcc includes will be there.
+
+rm -f /usr/lib/gcc
+
+Form a build directory.
+
+mkdir -v build && cd build
+
+Prep for compilation.
+
+SED=sed ../configure --prefix=/usr --enable-languages=c,c++ --disable-multilib --disable-bootstrap --disable-libmpx --with-system-zlib
+
+Now,
+
+make
+
+Make sure the stack doesn't get exhausted:
+ulimit -s 32768
+
+Remove a shitty test:
+rm ../gcc/testsuite/g++.dg/pr83239.C
+
+Test as an unpriveleged user:
+chown -Rv nobody .
+su nobody -s /bin/bash -c "PATH=$PATH make -k check"
+That is all for tonight. This will take years. Pick up here!
