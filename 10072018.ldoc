@@ -261,3 +261,53 @@ make check
 make install
 
 All tests passed! Yay!
+
+= 6.24: Ncurses =
+
+Oh we know what this does c:
+
+Do NOT install a static library not handled by configure.
+
+sed -i '/LIBTOOL_INSTALL/d' c++/Makefile.in
+
+Configure thus:
+
+./configure --prefix=/usr --mandir=/usr/share/man --with-shared --without-debug --without-normal --enable-pc-files --enable-widec
+
+This enables wide character libraries instead of normal ones. Further, we install .pc files for pkg config. We do not install most static libraries.
+
+Next,
+
+make
+make install
+
+Move the shared libraries to /lib:
+
+mv -v /usr/lib/libncursesw.so.6* /lib
+
+The libraries have been moved! Fix a symlink:
+
+ln -sfv ../../lib/$(readlink /usr/lib/libncursesw.so) /usr/lib/libncursesw.so
+
+Now, many applications expect the linker to be able to find non wide character libraries. Trick them.
+
+for lib in ncurses form panel menu ; do
+    rm -vf /usr/lib/lib${lib}.so
+    echo "INPUT(-l${lib}w)" > /usr/lib/${lib}.so
+    ln -sfv ${lib}w.pc /usr/lib/pkgconfig/${lib}.pc
+done
+
+make sure that applications looking for lcurses are buildable:
+
+rm -vf /usr/lib/libcursesw.so
+echo "INPUT(-lncursesw)" > /usr/lib/libcursesw.so
+ln -sfv libncurses.so /usr/lib/libcurses.so
+
+And install the documentation:
+
+mkdir -v /usr/share/doc/ncurses-6.1
+cp -v -R doc/* /usr/share/doc/ncurses-6.1
+
+If you have old shit laying around requiring non wide character sets ( read: building something pre-2000 ) see p. 131 to fix it up.
+
+Done! See you next time!
