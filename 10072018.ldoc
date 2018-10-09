@@ -242,3 +242,22 @@ Next, install the shared bzip2 binary into /bin, make some symlinks, etc.
 cp -v bzip2-shared /bin/bzip2 && cp -av libbz2.so* /lib && ln -sv ../../lib/libbz2.so.1.0 /usr/lib/libbz2.so && rm -v /usr/bin/{bunzip2,bzcat,bzip2} && ln -sv bzip2 /bin/bunzip2 && ln -sv bzip2 /bin/bzcat
 
 Done!
+
+= 6.23: pkg-config =
+
+This is a tool for passing include / library paths to build tools during configure and make.
+
+configure thus:
+
+./configure --prefix=/usr --with-internal-glib --disable-host-tool --docdir=/usr/share/doc/pkg-config-0.29.2
+
+This allows pkg-config to use its internal version of glib; there is no external version available here.
+We do not want a hard link to pkg-config, so we use disable-host-tool.
+
+Now,
+
+make
+make check
+make install
+
+All tests passed! Yay!
