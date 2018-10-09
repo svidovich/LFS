@@ -214,4 +214,31 @@ Move a misplaced file:
 mkdir -pv /usr/share/gdb/auto-load/usr/lib
 mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib
 
+= 6.22: bzip2 =
 
+We know what this guy does.
+Install a patch:
+patch -Np1 -i ../bzip2-1.0.6-install_docs-1.patch
+this makes sure that the documentation gets installed.
+
+Next, verify that the installation of symlinks are relative:
+sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
+
+Make sure that the man pages go to the right place:
+sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
+
+Prep thus:
+
+make -f Makefile-libbz2_so
+make clean
+We will build using a specific makefile.
+
+Next,
+make
+make PREFIX=/usr install
+
+Next, install the shared bzip2 binary into /bin, make some symlinks, etc.
+
+cp -v bzip2-shared /bin/bzip2 && cp -av libbz2.so* /lib && ln -sv ../../lib/libbz2.so.1.0 /usr/lib/libbz2.so && rm -v /usr/bin/{bunzip2,bzcat,bzip2} && ln -sv bzip2 /bin/bunzip2 && ln -sv bzip2 /bin/bzcat
+
+Done!
