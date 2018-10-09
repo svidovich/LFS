@@ -151,3 +151,22 @@ Test as an unpriveleged user:
 chown -Rv nobody .
 su nobody -s /bin/bash -c "PATH=$PATH make -k check"
 That is all for tonight. This will take years. Pick up here!
+
+Let's begin again! We are ready to say
+
+make install
+
+
+Create a symlink required by FHS:
+
+ln -sv ../usr/bin/cpp /lib
+
+Some packages use cc to call the c compiler, so say
+
+ln -sv gcc /usr/bin/cc
+
+Add a compatability symlink for optimization when building:
+
+install -v -dm755 /usr/lib/bfd-plugins
+
+ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/8.2.0/liblto_plugin.so /usr/lib/bfd-plugins/
