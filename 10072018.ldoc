@@ -170,3 +170,48 @@ Add a compatability symlink for optimization when building:
 install -v -dm755 /usr/lib/bfd-plugins
 
 ln -sfv ../../libexec/gcc/$(gcc -dumpmachine)/8.2.0/liblto_plugin.so /usr/lib/bfd-plugins/
+
+Now that GCC is completed, let's do a sanity check.
+
+echo 'int main(){}' > dummy.c
+cc dummy.c -v -Wl,--verbose &> dummy.log
+readelf -l a.out | grep ': /lib'
+
+We pass! yay!
+
+Ensure we are set up to use the correct start files:
+
+grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log
+
+And we are!
+
+Verify the compiler is searching for the correct headers:
+
+grep -B4 '^ /usr/include' dummy.log
+
+It is!
+
+Verify the linker is being used with the right search paths:
+
+grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g'
+
+It is!
+
+Make sure we're using the right libc:
+
+grep "/lib.*/libc.so.6 " dummy.log
+
+It worked!
+
+Finally, check the dynamic linker.
+
+grep found dummy.log
+
+Yep! Very good. Cleanup:
+rm -v dummy.c a.out dummy.log
+
+Move a misplaced file:
+mkdir -pv /usr/share/gdb/auto-load/usr/lib
+mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib
+
+
