@@ -120,6 +120,35 @@ install -m644 doc/sed.html /usr/share/doc/sed-4.5
 
 
 Done!
-mv
-mv
-ln
+
+There are 77 packages.
+This is #29.
+
+= 29: psmisc =
+
+Configure:
+./configure --prefix=/usr
+
+If you get an error that talks about not being able to find ncurses, redo the following in the ncurses folder:
+
+mv -v /usr/lib/libncursesw.so.6* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libncursesw.so) 
+/usr/lib/libncursesw.so
+for lib in ncurses form panel menu ; do
+     rm -vf                    /usr/lib/lib${lib}.so
+     echo "INPUT(-l${lib}w)" > /usr/lib/lib${lib}.so
+     ln -sfv ${lib}w.pc        /usr/lib/pkgconfig/${lib}.pc
+done
+rm -vf                     /usr/lib/libcursesw.so
+echo "INPUT(-lncursesw)" > /usr/lib/libcursesw.so
+ln -sfv libncurses.so      /usr/lib/libcurses.so
+
+make
+make install
+
+Move killall and fuser to FHS standard locations:
+
+mv -v /usr/bin/fuser /bin
+mv -v /usr/bin/killall /bin
+
+Done!
