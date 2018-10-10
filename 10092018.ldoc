@@ -39,3 +39,28 @@ Nice! The shared library must be moved to lib. Then, recreate the so file in /us
 	ln -sfv ../../lib/$(readlink /usr/lib/libattr.so) /usr/lib/libattr.so
 
 Done!
+
+= 6.26: ACL =
+
+This lets us administer access control lists. It is probably very important.
+
+Let's configure:
+
+./configure --prefix=/usr --bindir=/bin --disable-static --libexecdir=/usr/lib --libexecdir=/usr/lib --docdir=/usr/share/doc/acl-2.2.53
+
+If you get an error in regards to not having an extended attributes library, try 
+
+	rm -rvf /usr/lib/libattr*
+	rm -rvf /lib/libattr*
+
+and then building attr over again.
+
+Next,
+make
+make install
+Like in attr, we need to move shared libraries and make symlinks
+
+	mv -v /usr/lib/libacl.so.* /lib
+	ln -sfv ../../lib/$(readlink /usr/lib/libacl.so) /usr/lib/libacl.so
+
+Done
