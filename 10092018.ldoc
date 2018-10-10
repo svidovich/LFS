@@ -152,3 +152,12 @@ mv -v /usr/bin/fuser /bin
 mv -v /usr/bin/killall /bin
 
 Done!
+
+= 6.30: Iana-Etc =
+This provides data for network services.
+This one is easy.
+
+make
+make install
+
+Done!
