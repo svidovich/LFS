@@ -64,3 +64,31 @@ Like in attr, we need to move shared libraries and make symlinks
 	ln -sfv ../../lib/$(readlink /usr/lib/libacl.so) /usr/lib/libacl.so
 
 Done
+
+= 6.27: Libcap =
+
+Lol what the fuck
+
+This package implements user-space interfaces to POSIX capabilities available in linux kernels
+It helps partition root privelege into different sets.
+
+prevent a static library from being installed:
+
+sed -i '/install*STALIBNAME/d' libcap/Makefile
+
+Next,
+
+make
+
+When installing, stop it from using setcap on itself.
+Also, prevent it from using lib64; instead use lib.
+
+make RAISE_SETFCAP=no lib=lib prefix=/usr install
+Then,
+chmod -v 755 /usr/lib/libcap.so
+
+Like the previous two, move the shared libraries:
+mv -v /usr/lib/libcap.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so
+
+Done!
