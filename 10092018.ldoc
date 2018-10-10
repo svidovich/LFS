@@ -92,3 +92,34 @@ mv -v /usr/lib/libcap.so.* /lib
 ln -sfv ../../lib/$(readlink /usr/lib/libcap.so) /usr/lib/libcap.so
 
 Done!
+
+= 6.28: Sed =
+
+Sed is a stream editor. No one knows what it does.
+
+First, use sed to modify sed by fixing our broken shit:
+
+sed -i 's/usr/tools' build-aux/help2man
+sed -i 's/testsuite.panic-tests.sh//' Makefile.in
+
+Prepare to compile:
+
+./configure --prefix=/usr --bindir=/bin
+
+Next,
+
+make
+make html
+make check
+
+Install and build documentation.
+
+make install
+install -d -m755 /usr/share/doc/sed-4.5
+install -m644 doc/sed.html /usr/share/doc/sed-4.5
+
+
+Done!
+mv
+mv
+ln
