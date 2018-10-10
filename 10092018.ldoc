@@ -1,0 +1,20 @@
+Hello friends!
+
+Some tips:
+
+If you get [ no tty available ... etc ]
+Try restarting your machine.
+
+If you get [ /mnt/lfs/dev/pts ], it is because you didn't run
+
+mount -v --bind /dev /mnt/lfs/dev 
+
+before you tried mounting devpts.
+
+I have added scripts for the restart process. They are run in this order:
+
+1. mount
+2. VKFS
+3. chroot
+
+Good! Let's move on.
