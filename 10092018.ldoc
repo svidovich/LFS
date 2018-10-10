@@ -161,3 +161,43 @@ make
 make install
 
 Done!
+
+= 6.31: Bison =
+
+This has a parser generator.
+
+Configure:
+
+./configure --prefix=/usr --docdir=/usr/share/doc/bison-3.0.5
+make
+make install
+
+Done!
+
+= 6.32: flex =
+
+This has a utility for generating programs that recognize patterns in text... wow!
+
+Fix an issue thanks to glibc:
+
+sed -i "/math.h/a #include <malloc.h>" src/flexdef.h
+
+Skip using help2man:
+
+HELP2MAN=/tools/bin/true ./configure --prefix=/usr --docdir=/usr/share/doc/flex-2.6.4
+
+Now,
+
+make
+make check
+make install
+
+Flex had a predecessor called lex. Some people don't know about it.
+
+So, make a symlink!
+
+ln -sv flex /usr/bin/lex
+
+Done!
+
+That's all for tonight! See you tomorrow!
