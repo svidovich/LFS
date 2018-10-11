@@ -1,0 +1,22 @@
+Hello!
+
+Let's get started.
+
+6.33: grep
+
+We fucked this up last time. I don't want that to happen again.
+
+./configure --prefix=/usr --bindir=/bin
+make
+make -k check
+make install
+
+I had some fails. I hope they are not vital.
+
+I am going to check that everything is where I expect it with
+
+ls /bin | grep grep
+
+egrep, fgrep and grep are all in place c:
+
+done!
