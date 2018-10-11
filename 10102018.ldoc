@@ -141,3 +141,27 @@ mv -v /usr/bin/{hostname,ping,pin6,traceroute} /bin
 mv -v /usr/bin/ifconfig /sbin
 
 done!
+
+= 6.40: Perl =
+
+This one is a doozy.
+
+Create an /etc/hosts file to be referenced by config.
+
+echo "127.0.0.1 localhost $(hostname)" > /etc/hosts
+
+Use external zlib and bzip modules:
+
+export BUILD_ZLIB=False
+export BUILD_BZIP2=0
+
+Use perl defaults to set it up:
+
+sh Configure -des -Dprefix=/usr -Dvendorprefix=/usr -Dman1dir=/usr/share/man/man1 -Dman3dir=/usr/share/man/man3 -Dpager="/usr/bin/less -isR" -Duseshrplib -Dusethreads
+
+make
+make install
+
+unset BUILD_ZLIB BUILD_BZIP2
+
+done!
