@@ -195,3 +195,15 @@ Install documentation:
 install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO
 
 Done!
+
+= 6.43: autoconf =
+
+This contains programs for producing shell scripts that automatically configure sourcecode. Whoa...
+
+./configure --prefix=/usr
+
+make
+make check TESTSUITEFLAGS=-j4
+make install
+
+Done!
