@@ -112,3 +112,32 @@ Add documentation:
 install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.6
 
 done!
+
+= 6.39: iNetutils =
+
+This contains programs for networking!
+
+Configure:
+
+./configure --prefix=/usr --localstatedir=/var --disable-logger --disable-whois --disable-rcp --disable-rexec --disable-rlogin --disable-rsh --disable-servers
+
+Yikes. We:
+
+-> Prevents the install of logger, because we will use a more recent one later.
+
+-> Prevent building old ass whois. See blfs.
+
+-> disable r... prevents the program from building obsolete programs that are insecure. See openssh in blfs.
+
+-> Prevent the installation of network servers as they are not appropriate for LFS. They are insecure.
+
+make
+make check
+make install
+
+Now, move some programs so they are accessible while /usr isn't:
+
+mv -v /usr/bin/{hostname,ping,pin6,traceroute} /bin
+mv -v /usr/bin/ifconfig /sbin
+
+done!
