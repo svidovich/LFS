@@ -177,3 +177,21 @@ make test
 make install
 
 Done!
+
+= 6.42: intltool =
+
+This is used for extracting translatable strings from source files.
+
+Fix a warning caused by perl:
+sed -i 's:\\\${:\\\$\\{:' intltool-update.in
+prep for installation:
+
+./configure --prefix=/usr
+make
+make check
+make install
+
+Install documentation:
+install -v -Dm644 doc/I18N-HOWTO /usr/share/doc/intltool-0.51.0/I18N-HOWTO
+
+Done!
