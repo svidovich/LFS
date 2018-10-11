@@ -20,3 +20,24 @@ ls /bin | grep grep
 egrep, fgrep and grep are all in place c:
 
 done!
+
+= 6.34: bash =
+
+Oh boy!
+
+Prep to compile:
+
+./configure --prefix=/usr --docdir=/usr/share/doc/bash-4.4.18 --without-bash-malloc --with-installed-readline
+
+Next,
+
+make
+
+make install
+mv -v /usr/bin/bash /bin
+exec /bin/bash --login +h
+
+Run the new bash, and replace the current one!
+exec /bin/bash --login +h
+
+done!
