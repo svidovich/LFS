@@ -165,3 +165,15 @@ make install
 unset BUILD_ZLIB BUILD_BZIP2
 
 done!
+
+= 6.41: XML parser =
+
+This is a perl interface for expat.
+
+perl Makefile.PL
+
+make
+make test
+make install
+
+Done!
