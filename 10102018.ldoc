@@ -54,3 +54,19 @@ Setting testseuiteflags allows us to use multiple cores! Otherwise this test wou
 make install
 
 Done!
+
+= 6.36: GDBM =
+
+This contains a database manager. This provides primitives for stashing key / data pairs, searching and retrieving, and deletion.
+
+Prep:
+
+./configure --prefix=/usr --disable-static --enable-libgdbm-compat
+
+This enables the libgdbm compatability library to be build.
+
+make
+make check
+make install
+
+Done!
