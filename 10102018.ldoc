@@ -41,3 +41,16 @@ Run the new bash, and replace the current one!
 exec /bin/bash --login +h
 
 done!
+
+= 6.35: Libtool =
+
+This provides a generic lib support script.
+It makes using shared libraries fun!
+
+./configure --prefix=/usr
+make
+make check TESTSUITEFLAGS=-j4
+Setting testseuiteflags allows us to use multiple cores! Otherwise this test would take half an hour!
+make install
+
+Done!
