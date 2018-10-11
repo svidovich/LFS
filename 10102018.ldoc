@@ -88,3 +88,27 @@ make -j1 check
 make install
 
 Done!
+
+= 6.38: expat =
+
+expat contains a stream-oriented C library for parsing XML.
+
+
+Fix a regression problem:
+
+sed -i 's|usr/bin/env |bin/|' run.sh.in
+
+Configure:
+
+./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/expat-2.2.6
+
+Now,
+make
+make check
+make install
+
+Add documentation:
+
+install -v -m644 doc/*.{html,png,css} /usr/share/doc/expat-2.2.6
+
+done!
