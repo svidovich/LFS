@@ -70,3 +70,21 @@ make check
 make install
 
 Done!
+
+= 6.37: gperf =
+
+This generates a perfect hash function from a key set.
+
+Configure:
+
+./configure --prefix=/usr --docdir=/usr/share/doc/gperf-3.1
+
+make
+
+make -j1 check
+
+( do not run simultaneous tests )
+
+make install
+
+Done!
