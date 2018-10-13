@@ -22,3 +22,23 @@ mv -v /usr/lib/liblzma.so.* /lib
 
 ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so
 Done!
+
+= 6.46: KMOD =
+
+This lets us load kernel modules.
+
+./configure --prefix=/usr --bindir=/bin --sysconfdir=/etc --with-rootlibdir=/lib --with-xz --with-zlib
+
+make
+
+make install
+
+It does not come with a test suite!
+
+Next,
+
+for target in depmod insmod lsmod modinfo modprobe rmmod; do
+    ln -sfv ../bin/kmod /sbin/$target
+done
+
+ln -sfv kmod /bin/lsmod
