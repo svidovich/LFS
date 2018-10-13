@@ -1,0 +1,24 @@
+Hello!
+
+= 6.45: XZ =
+
+This contains programs for compression and decompression.
+
+Prepare to compile the package:
+
+./ configure --prefix=/usr --disable-static --docdir=/usr/share/doc/xz-5.2.4
+
+Then,
+
+make
+make check
+make install
+
+Next, make sure essential files are in the right place:
+
+mv -v /usr/bin/{lzma,unlzma,lzcat,xz,unxz,xzcat} /bin
+
+mv -v /usr/lib/liblzma.so.* /lib
+
+ln -svf ../../lib/$(readlink /usr/lib/liblzma.so) /usr/lib/liblzma.so
+Done!
