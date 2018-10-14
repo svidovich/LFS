@@ -37,3 +37,25 @@ make -C libelf install
 install -vm644 config/libelf.pc /usr/lib/pkgconfig
 
 Done!
+
+= 6.49: libffi =
+
+This prevides a programming interface to various calling convention. This allows you to call functions specified by a call interface description at run time.
+
+Mod the makefile to install to standard directories:
+
+sed -e '/^includesdir/ s/$(libdir).*$/$(includedir)/' -i include/Makefile.in
+
+sed -e '/^includedir/ s/=.*$/=@includedir@/' -e 's/^Cflags: -I${includedir}/Cflags:/' -i libffi.pc.in
+
+Configure:
+
+./configure --prefix=/usr --disable-static --with-gcc-arch=native
+
+Next,
+
+make
+make check
+make install
+
+Done!
