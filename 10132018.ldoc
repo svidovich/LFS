@@ -25,3 +25,15 @@ chmod -v 0755 /usr/lib/preloadable_libintl.so
 
 Done!
 
+= 6.48: libelf =
+
+This is a library for handling ELF files!
+
+./configure --prefix=/usr
+make
+make check
+
+make -C libelf install
+install -vm644 config/libelf.pc /usr/lib/pkgconfig
+
+Done!
