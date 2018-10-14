@@ -22,3 +22,17 @@ mv -v /usr/share/doc/opennssl /usr/share/doc/openssl-1.1.0i
 dp -vfr doc/* /usr/share/doc/openssl-1.1.0i
 
 Done!
+
+= 6.51: Python 3.7 =
+
+Woo python!
+
+Configure:
+
+./configure --prefix=/usr --enable-shared --with-system-expat --with-system-ffi --with-ensurepip=yes
+
+make
+make install
+chmod -v 755 /usr/lib/libpython3.{7m.,}so
+
+Done!
