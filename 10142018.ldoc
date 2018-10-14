@@ -36,3 +36,24 @@ make install
 chmod -v 755 /usr/lib/libpython3.{7m.,}so
 
 Done!
+
+= 6.52: Ninja =
+
+A build system focused on sped.
+
+Patch ninja:
+
+patch -Np1 -i ../ninja-1.8.2-add_NINJAJOBS_var-1.patch
+
+Build ninja:
+
+python3 configure.py --bootstrap
+
+Install the package:
+
+install -vm755 ninja /usr/bin
+install -vDm644 misc/bash-completion /usr/share/bash-completion/completions/ninja
+install -vDm644 misc/zsh-completion /usr/share/zsh/site-functions/_ninja
+
+Done!
+
