@@ -57,3 +57,17 @@ install -vDm644 misc/zsh-completion /usr/share/zsh/site-functions/_ninja
 
 Done!
 
+= 6.53: Meson =
+
+Meson is a buld system meant to be user friendly!
+Compile:
+
+python3 setup.py build
+
+Install:
+
+python3 setup.py install -root=dest
+
+With a specified root location, we get a nice hierarchy, then copy it.
+
+Done!
