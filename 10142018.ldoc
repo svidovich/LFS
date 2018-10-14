@@ -1,0 +1,24 @@
+Hello!
+
+= 6.50: OpenSSL =
+
+This is a cryptographic library.
+
+Prepare to compile:
+
+./config --prefix=/usr --openssldir=/etc/ssl --libdir=lib shared zlib-dynamic
+
+make
+make test
+
+Install:
+
+sed -i '/INSTALL_LIBS/s/libcrypto.a libssl.a//' Makefile
+make MANSUFFIX=ssl install
+
+Install some documentation:
+
+mv -v /usr/share/doc/opennssl /usr/share/doc/openssl-1.1.0i
+dp -vfr doc/* /usr/share/doc/openssl-1.1.0i
+
+Done!
