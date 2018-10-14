@@ -1,0 +1,27 @@
+Welcome back!
+
+= 6.47: gettext 
+
+This contains utils for internationalization and localization.
+
+Prevent some infinite loops:
+
+sed -i '/^TESTS =/d' gettext-runtime/tests/Makefile.in && sed -i 's/test-lock..EXEEXT.//' gettext-tools/gnulib-tests/Makefile.in
+
+Fix a config file:
+
+sed -e '/AppData/{N;N;p;s/\.appdata\./.metainfo./}' -i gettext-tools/its/appdata.loc
+
+Prepare to compile:
+
+./configure --prefix=/usr --disable-static --docdir=/usr/share/doc/gettext-0.19.8.1
+
+Then,
+
+make
+make check
+make install
+chmod -v 0755 /usr/lib/preloadable_libintl.so
+
+Done!
+
