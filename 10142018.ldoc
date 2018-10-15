@@ -197,3 +197,18 @@ make check
 make install
 
 Done!
+
+= 6.59: Gawk =
+
+This is like awk, but gnu. lol.
+Don't install garbage:
+
+sed -i 's/extras//' Makefile.in
+Next,
+
+./configure --prefix=/usr
+make
+make check
+make install
+
+Done!
