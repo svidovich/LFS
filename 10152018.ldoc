@@ -8,3 +8,15 @@ PAGE=letter ./configure --prefix=/usr
 make -j1
 make install
 Done!
+
+= 6.62: GRAND UNIFIED BOOTLOADER =
+
+configure:
+
+./configure --prefix=/usr --sbindir=/sbin --sysconfdir=/etc --disable-efiemu --disable-werror
+
+make
+make install
+
+Shockingly easy for what it is. Done!
+
