@@ -42,3 +42,20 @@ Move gzip to the root fs:
 mv -v /usr/bin/gzip /bin
 
 Done!
+
+= 6.65: IPROUTE =
+
+This allows for ipv4 based networking.
+We exclude arpd because it has out-of-scope dependencies.
+We also exclude iptables until later.
+
+sed -i /ARPD/d Makefile
+rm -fv man/man8/arpd.8
+sed -i 's/.m_ipt.o//' tc/Makefile
+
+Next,
+
+make
+make DOCDIR=/usr/share/doc/iproute2-4.18.0 install
+
+Done!
