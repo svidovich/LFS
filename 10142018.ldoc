@@ -185,3 +185,15 @@ Fix a script:
 sed -i '1 s/tools/usr/' /usr/bin/checkmk
 
 Done!
+
+= 6.58: diffutils =
+
+This shows differences between files and directories.
+
+./configure --prefix=/usr
+
+make
+make check
+make install
+
+Done!
