@@ -172,3 +172,16 @@ mv -v /usr/bin/{head,sleep,nice} /bin
 
 Done!
 
+= 6.57: Check =
+
+Unit testing for C!
+
+./configure --prefix=/usr
+
+make
+make check
+make install
+Fix a script:
+sed -i '1 s/tools/usr/' /usr/bin/checkmk
+
+Done!
