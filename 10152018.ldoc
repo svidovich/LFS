@@ -59,3 +59,208 @@ make
 make DOCDIR=/usr/share/doc/iproute2-4.18.0 install
 
 Done!
+
+= 666: HAUNTED KBD =
+
+This contains key-table files, console fonts and keyboard utils.
+
+Patch to fix i386 keymaps:
+patch -Np1 -i ../kbd-2.0.4-backspace-1.patch
+
+Remove dumb old garbage that nobody cares about ( they use an old library )
+
+sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+
+Configure:
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr --disable-vlock
+
+We disable vlock due to missing dependencies.
+
+Now,
+
+make
+make check
+make install
+
+Get the documentation:
+mkdir -v /usr/share/doc/kbd-2.0.4 && cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4          │
+Patch to fix i386 keymaps:
+patch -Np1 -i ../kbd-2.0.4-backspace-1.patch
+
+Remove dumb old garbage that nobody cares about ( they use an old library )
+
+sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+
+Configure:
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr --disable-vlock
+
+We disable vlock due to missing dependencies.
+
+Now,
+
+make
+make check
+make install
+
+Get the documentation:
+mkdir -v /usr/share/doc/kbd-2.0.4 && cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4          │
+Patch to fix i386 keymaps:
+patch -Np1 -i ../kbd-2.0.4-backspace-1.patch
+
+Remove dumb old garbage that nobody cares about ( they use an old library )
+
+sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+
+Configure:
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr --disable-vlock
+
+We disable vlock due to missing dependencies.
+
+Now,
+
+make
+make check
+make install
+
+Get the documentation:
+mkdir -v /usr/share/doc/kbd-2.0.4 && cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4          │
+Patch to fix i386 keymaps:
+patch -Np1 -i ../kbd-2.0.4-backspace-1.patch
+
+Remove dumb old garbage that nobody cares about ( they use an old library )
+
+sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+
+Configure:
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr --disable-vlock
+
+We disable vlock due to missing dependencies.
+
+Now,
+
+make
+make check
+make install
+
+Get the documentation:
+mkdir -v /usr/share/doc/kbd-2.0.4 && cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4          │
+Patch to fix i386 keymaps:
+patch -Np1 -i ../kbd-2.0.4-backspace-1.patch
+
+Remove dumb old garbage that nobody cares about ( they use an old library )
+
+sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+
+Configure:
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr --disable-vlock
+
+We disable vlock due to missing dependencies.
+
+Now,
+
+make
+make check
+make install
+
+Get the documentation:
+mkdir -v /usr/share/doc/kbd-2.0.4 && cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4          │
+Patch to fix i386 keymaps:
+patch -Np1 -i ../kbd-2.0.4-backspace-1.patch
+
+Remove dumb old garbage that nobody cares about ( they use an old library )
+
+sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+
+Configure:
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr --disable-vlock
+
+We disable vlock due to missing dependencies.
+
+Now,
+
+make
+make check
+make install
+
+Get the documentation:
+mkdir -v /usr/share/doc/kbd-2.0.4 && cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4          │
+Patch to fix i386 keymaps:
+patch -Np1 -i ../kbd-2.0.4-backspace-1.patch
+
+Remove dumb old garbage that nobody cares about ( they use an old library )
+
+sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+
+Configure:
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr --disable-vlock
+
+We disable vlock due to missing dependencies.
+
+Now,
+
+make
+make check
+make install
+
+Get the documentation:
+mkdir -v /usr/share/doc/kbd-2.0.4 && cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4          │
+Patch to fix i386 keymaps:
+patch -Np1 -i ../kbd-2.0.4-backspace-1.patch
+
+Remove dumb old garbage that nobody cares about ( they use an old library )
+
+sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+
+Configure:
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr --disable-vlock
+
+We disable vlock due to missing dependencies.
+
+Now,
+
+make
+make check
+make install
+
+Get the documentation:
+mkdir -v /usr/share/doc/kbd-2.0.4 && cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4          │
+Patch to fix i386 keymaps:
+patch -Np1 -i ../kbd-2.0.4-backspace-1.patch
+
+Remove dumb old garbage that nobody cares about ( they use an old library )
+
+sed -i 's/\(RESIZECONS_PROGS=\)yes/\1no/g' configure
+sed -i 's/resizecons.8 //' docs/man/man8/Makefile.in
+
+Configure:
+
+PKG_CONFIG_PATH=/tools/lib/pkgconfig ./configure --prefix=/usr --disable-vlock
+
+We disable vlock due to missing dependencies.
+
+Now,
+
+make
+make check
+make install
+
+Get the documentation:
+mkdir -v /usr/share/doc/kbd-2.0.4 && cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4          │
+
+Done!
