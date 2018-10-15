@@ -71,3 +71,29 @@ python3 setup.py install -root=dest
 With a specified root location, we get a nice hierarchy, then copy it.
 
 Done!
+
+= 6.54: procps/ng =
+
+This contains programs for monitoring processes.
+
+Configure:
+
+./configure --prefix=/usr --exec-prefix= --libdir=/usr/lib --docdir=/usr/share/doc/procps-ng-3.3.15 --disable-static --disable-kill
+
+I think it is weird that exec-prefix is left blank. I don't knowwtf that does.
+Next,
+
+make
+
+Remove tests which tend to fail:
+sed -i -r 's|(pmap_initname)\\\$|\1|' testsuite/pmap.test/pmap.exp && sed -i '/set tty/d' testsuite/pkill.test/pkill.exp && rm testsuite/pgrep.test/pgrep.exp
+
+make check
+make install
+
+Move essential libraries which can always be found!
+
+mv -v /usr/lib/libprocps.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so
+
+Done!
