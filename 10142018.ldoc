@@ -97,3 +97,34 @@ mv -v /usr/lib/libprocps.so.* /lib
 ln -sfv ../../lib/$(readlink /usr/lib/libprocps.so) /usr/lib/libprocps.so
 
 Done!
+
+= 6.55: e2fsprogs =
+
+This contains utilities for handling ext* file systems.
+This one wants a build directory!
+
+mkdir -v build && cd build
+
+Configure:
+
+../configure --prefix=/usr --bindir=/bin --with-root-prefix="" --enable-elf-shlibs --disable-libblkid --disable-libuuid --disable-uuid --disable-fsck
+
+Next,
+
+make
+
+We need to link some libraries before we run the test suite:
+ln -sfv /tools/lib/lib{blk,uu}id.so.1 lib
+make LD_LIBRARY_PATH=/tools/lib check
+
+Now we can install. We will install static libraries as well.
+
+make install
+make install-libs
+
+Update the system dir file.
+
+gunzip -v /usr/share/info/libext2fs.info.gz
+install-info --dir-file=/usr/share/info/dir /usr/share/info/libext2fs.info
+
+Done!
