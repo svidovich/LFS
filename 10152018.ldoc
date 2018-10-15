@@ -20,3 +20,25 @@ make install
 
 Shockingly easy for what it is. Done!
 
+= 6.64: GZIP =
+
+We know what this does!
+
+Make some fixes thanks to glibc:
+
+sed -i 's/IO_ftrylockfile/IO_EOF_SEEN/' lib/*.c
+echo "#define _IO_IN_BACKUP 0x100" >> lib/stdio-impl.h
+
+Prepare for compilation:
+./configure --prefix=/usr
+
+Then,
+
+make
+make check
+make install
+
+Move gzip to the root fs:
+mv -v /usr/bin/gzip /bin
+
+Done!
