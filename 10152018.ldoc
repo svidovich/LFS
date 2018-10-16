@@ -276,3 +276,21 @@ make check
 make install
 
 Done!
+
+= 6.68: Make =
+
+Let's make make!
+
+Make a fix due to glibc:
+sed -i '211,217 d; 219,229 d; 232 d' glob/glob.c
+
+./configure --prefix=/usr
+make
+
+The test suite needs to know where the perl scripts are.
+
+make PERL5LIB=$PWD/tests/ check
+
+make install
+
+Done!
