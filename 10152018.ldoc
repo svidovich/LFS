@@ -333,3 +333,15 @@ user.* -/var/log/user.log
 EOF
 
 Done! Use klogd as a daemon for kernel messages...
+
+= 6.71: Sysvinit =
+
+This contains programs for controlling startup, runtime, and shutdown.
+Patch it to remove some dumb shit:
+
+patch -Np1 -i ../sysvinit-2.90-consolidated-1.patch
+
+make -C src
+make -C src install
+
+Done!
