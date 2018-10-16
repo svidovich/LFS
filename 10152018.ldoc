@@ -345,3 +345,49 @@ make -C src
 make -C src install
 
 Done!
+
+= 6.72: EUDEV =
+
+This allows dynamic creation of device nodes.
+
+Add a workaround to prevent /tools from being hard coded into eudev bins:
+
+cat > config.cache << "EOF"
+HAVE_BLKID=1
+BLKID_LIBS="-lblkid"
+BLKID_CFLAGS="-I/tools/include"
+EOF
+
+Configure:
+
+./configure --prefix=/usr --bindir=/sbin --sbindir=/sbin --libdir=/usr/lib --sysconfdir=/etc --libexecdir=/lib --with-rootprefix= --with-rootlibdir=/lib --enable-manpages --disable-static --config-cache
+
+Compile:
+
+LIBRARY_PATH=/tools/lib make
+
+Create some necessary directories:
+mkdir -pv /{lib,etc}/udev/rules.d
+
+Test:
+make LD_LIBRARY_PATH=/tools/lib check
+
+Install:
+make LD_LIBRARY_PATH=/tools/lib install
+
+Finally, install support stuff.
+
+tar -xvf ../udev-lfs-20171102.tar.bz2
+make -f udev-lfs-20171102/Makefile.lfs install
+
+Now, let's configure. Info about hardware devices stays in /etc/udev/hwdb.d and /lib/udev/hwdb.d. Create the initial database by
+
+ANY TIME HARDWARE INFORMATION IS UPDATED YOU SHOULD RUN THIS
+
+////////////////////////////////////////////////
+LD_LIBRARY_PATH=/tools/lib udevadm hwdb --update
+////////////////////////////////////////////////
+
+ANY TIME HARDWARE INFORMATION IS UPDATED YOU SHOULD RUN THIS
+
+Done!
