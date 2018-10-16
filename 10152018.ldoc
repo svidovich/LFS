@@ -422,3 +422,19 @@ I got some dirty looking warnings during install. Let's hope they aren't pivotal
 
 This package is where fdisk comes from!
 Done!
+
+= 6.74: man-db =
+
+This contains programs for finding and viewing man pages.
+
+./configure --prefix=/usr --docdir=/usr/share/doc/man-db-2.8.4 --sysconfdir=/etc --disable-setuid --enable-cache-owner=bin --with-browser=/usr/bin/lynx --with-vgrind=/usr/bin/vgrind --with-grap=/usr/bin/grap --with-systemdtmpfilesdir=
+
+Wow!
+
+make
+make check
+make install
+
+Check out: lynx, text-based web browser
+
+Done!
