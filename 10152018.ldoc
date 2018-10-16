@@ -454,3 +454,22 @@ make install
 make -C doc install-html docdir=/usr/share/doc/tar-1.30
 
 Done!
+
+= 6.76: Texinfo =
+
+This allows us to read write and convert info pages.
+
+Fix a file that creates tonnes of failures unreasonably:
+sed -i '5481,5485 s/({/(\\{/' tp/Texinfo/Parser.pm
+
+Configure:
+./configure --prefi=/usr --disable-static
+
+Next,
+
+make
+make check
+make install
+make TEXMF=/usr/share/texmf install-tex
+
+Done!
