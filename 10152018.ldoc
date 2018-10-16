@@ -264,3 +264,15 @@ Get the documentation:
 mkdir -v /usr/share/doc/kbd-2.0.4 && cp -R -v docs/doc/* /usr/share/doc/kbd-2.0.4          │
 
 Done!
+
+= 6.67: Libpipeline =
+
+This contains a library for manipulating pipelines of subprocesses.
+
+Just
+./configure --prefix = /usr
+make
+make check
+make install
+
+Done!
