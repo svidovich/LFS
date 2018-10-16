@@ -1,0 +1,7 @@
+Hello!
+
+All of our packages are installed. We will NOT be stripping, because it is dangerous. 
+We need to log in with a new chroot command, so I will build a new script to do so. This is because the programs in /tools are no longer necessary! So let's get rid of those, eh? (HOW ABOUT A BACKUP FIRST LOL)
+I am simply copying the toolchain into a backup directory. That should be fine.
+It is quite large, though o.o
+
