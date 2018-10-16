@@ -391,3 +391,34 @@ LD_LIBRARY_PATH=/tools/lib udevadm hwdb --update
 ANY TIME HARDWARE INFORMATION IS UPDATED YOU SHOULD RUN THIS
 
 Done!
+
+= 6.73: Util Linux =
+
+This contains miscellanious utility programs, which we'll list.
+
+Use /var/lib/hwclock instead of /etc for the adjtime file.
+
+mkdir -pv /var/lib/hwclock
+
+Remove some junk symlinks:
+
+rm -vf /usr/include/{blkid,libmount,uuid}
+
+Configure!
+
+
+./configure ADJTIME_PATH=/var/lib/hwclock/adjtime --docdir=/usr/share/doc/util-linux-2.32.1 --disable-chfn-chsh --disable-login --disable-nologin --disable-su --disable-setpriv --disable-runuser --disable-pylibmount --disable-static --without-python --without-systemd --without-systemdsystemunitdiro
+
+The longest fucking configure command in history
+
+Now,
+make
+
+We are going to skip the test because it can brick the OS i'm building. Fuck that lol.
+
+make install
+
+I got some dirty looking warnings during install. Let's hope they aren't pivotal.
+
+This package is where fdisk comes from!
+Done!
