@@ -438,3 +438,19 @@ make install
 Check out: lynx, text-based web browser
 
 Done!
+
+= 6.75: TAR =
+
+The tape archiver!
+
+Configure:
+
+FORCE_UNSAFE_CONFIGURE=1 ./configure --prefix=/usr --bindir=/bin
+
+Then,
+make
+make check
+make install
+make -C doc install-html docdir=/usr/share/doc/tar-1.30
+
+Done!
