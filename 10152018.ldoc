@@ -473,3 +473,51 @@ make install
 make TEXMF=/usr/share/texmf install-tex
 
 Done!
+
+= 6.77: VIM =
+
+At long last.
+
+Change the default location of vimrc to /etc:
+
+echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+
+Then,
+./configure --prefix=/usr
+make
+make install
+
+Now, enter vi instead of vim when vi is called:
+
+ln -sv vim /usr/bin/vi
+for L in /usr/share/man/{,*/}man1/vim.1; do
+	ln -sv vim.1 $(dirname $L)/vi.1
+done
+
+Make the documentation consistent:
+
+ln -sv ../vim/vim81/doc /usr/share/doc/vim-8.1
+
+You will probably need to reinstall vim if you shove xwindows on top of this.
+
+Let's configure vim!
+
+cat > /etc/vimrc << "EOF"
+" Begin /etc/vimrc
+" Ensure defaults are set before customizing settings, not after
+source $VIMRUNTIME/defaults.vim
+let skip_defaults_vim=1
+set nocompatible
+set backspace=2
+set mouse=
+syntax on
+if (&term == "xterm") || (&term == "putty")
+set background=dark
+endif
+" End /etc/vimrc
+EOF
+
+
+Congratulations --
+
+you have installed all of the packages needed for your LFS system :)
