@@ -5,3 +5,21 @@ We need to log in with a new chroot command, so I will build a new script to do 
 I am simply copying the toolchain into a backup directory. That should be fine.
 It is quite large, though o.o
 
+
+Next, we can remove some junk leftover from tests.
+
+rm -rf /tmp/*
+
+We need to remove some static libraries.
+rm -f /usr/lib/lib{bfd,opcodes}.a
+rm -f /usr/lib/libbz2.a
+rm -f /usr/lib/lib{com_err,e2p,ext2fs,ss}.a
+rm -f /usr/lib/libltdl.a
+rm -f /usr/lib/libfl.a
+rm -f /usr/lib/libz.a
+
+In addition, there are a bunch of libtools archive files we don't need, so let's ace those.
+
+find /usr/lib /usr/libexec -name \*.la -delete
+
+So that was some cleanup. Next, we need to learn about system config.
