@@ -62,6 +62,37 @@ support on demand.
 IV. Hotplugging & Dynamic Devices
 The kernel recognizes when a device is connected and constructs a uevent, which is handled by udevd.
 
+There are sometimes issues when creating devices or modules. For example, a kernel module may not be loaded automatically for
+a number of reasons. Udev only loads a module if it has a bus-specific alias, and the bus driver properly exports the aliases to
+sysfs. Otherwise, module loading should be done by other means. Udev ( kernel latest ) is known to load proper drivers for input,
+IDE, PCI, USB,SCSI, SERIO and FireWire. If a device driver has support for Udev, running modinfo with the correct module name
+will make a device directory under /sys/bus with a modalias file inside. If there is no modalias file, then the kernel devs have
+not yet added support for the particular bus type.
 
+It is also possible that a kernel module not be loaded automatically, and that Udev is not meant to load it at all. If a
+wrapper module only enhances functionality, modprobe can be configured to load the wrapper after Udev has loaded the wrapped 
+module. To do so, you can add a softdep line to /etc/modprobe.d/<filename>.conf:
+
+	softdep <module> post: <wrapper>
+
+Softdep can have pre, post or both.
+
+Udev may also load something you don't care for. No problem -- you can always make a blacklist or not build it. To make a 
+blacklist, use the file /etc/modprobe.d/blacklist.conf and therein say something like
+
+	blacklist <module>
+
+These can still be loaded manually with an explicit modprobe command.
+
+Udev may crate a device incorrectly, or create a wrong symlink. This will happen if a rule unexpectedly matches a device. You
+can find the rule and make it more specific with udevadm info.
+
+If Udev doesn't work reliably and it isn't a failed symlink issue, it could be kernel timing. You can work around it by creating
+a rule that waits for sysfs attributes and appends it to /etc/udev/rules.d/10-wait_for_sysfs.rules.
+
+If Udev just fails to make a device, it is probably a third party driver outside of the kernel tree. In this case, make a static
+device node in /lib/udev/devices with the proper major and minornumbers which can be obtained in devices.txt in the kernel docs.
+
+If device naming order changes swaps after a reboot, it is because that's how Udev works. Deal with it, punk.
 
 
