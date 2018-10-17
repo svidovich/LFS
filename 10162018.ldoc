@@ -95,4 +95,14 @@ device node in /lib/udev/devices with the proper major and minornumbers which ca
 
 If device naming order changes swaps after a reboot, it is because that's how Udev works. Deal with it, punk.
 
+( 7.4 ) Next, we should talk about managing devices. 
+Udev names network devices by firmware/bios data. This is so that network devices are named consistently. A new naming scheme
+is around, whcih is why your wireless is named wlp3s0. You can implement the old scheme as desired by adding net.ifnames=0 on the kernel command line.
+It can be restored to the new version by generating initial rules and then inspecting them:
+
+bash /lib/udev/init-net-rules.sh
+cat /etc/udev/rules.d/70-persistent-net.rules
+
+
+
 
