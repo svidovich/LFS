@@ -31,12 +31,37 @@ ____________________________
 |\/\/\/\/\/\/\/\/\/\/\/\/\/|
 \__________________________/
 
-Booting is difficult, and everythiing has to be done in order and as fast as possible.The boot process that has been used since
+( 7.1 ) Booting is difficult, and everythiing has to be done in order and as fast as possible.The boot process that has been used since
 you were a baby is called System V, which contains an initialization that sets up necessary programs. It also kicks off a boot-
 strapping process run by a script called rc.
 Init is controlled by /etc/inittab, and is organized into run levels with different features; usually, full multiuser mode or
 full multiuser mode with a display manager are used. To begin, we should install the provided LFS bootscripts. Just extract, and
-then make install. A number of helpful programs come along with
-it.
+then make install. A number of helpful programs come along with it.
+
+( 7.3 ) Next, we should talk about device and module handling.
+Older linux systems used a static device creation method, wherein thousands of nodes were made with every possible device 
+number the heart could desire. It was decided that this was a dumbass idea ( because it was ) and instead, the kernel was
+updated to make nodes for devices only when they were detected. This is a decidedly less fucking stupid idea.
+A virtual file system called sysfs exists these days to export a view of the system's hardware configuration to user processes.
+
+In order to implement Udev, there are a number of steps we must take. 
+
+I. Sysfs
+The sysfs filesystem knows about present devices when modules get loaded or when kernel-compiled objects get registered.
+Once sysfs is mounted on /sys, data becomes available to userspace processes and to udevd.
+
+II. Device Node Creation
+Device files are created by the kernel. Any driver that wants to register a device node will go through devtmpfs. Afterward, the
+kernel sends a uevent to udevd, which creates additional symlinks, permissions, groups, etc. for the device node.
+
+III. Module Loading
+Drivers compiled as modules may have aliases built in them. For many devices, the bus driver exports the alias of the driver
+that would handle the device via sysfs. The kernel is also able to load modules fo network protocols, filesystems and NLS
+support on demand.
+
+IV. Hotplugging & Dynamic Devices
+The kernel recognizes when a device is connected and constructs a uevent, which is handled by udevd.
+
+
 
 
