@@ -23,3 +23,20 @@ In addition, there are a bunch of libtools archive files we don't need, so let's
 find /usr/lib /usr/libexec -name \*.la -delete
 
 So that was some cleanup. Next, we need to learn about system config.
+
+____________________________
+|/\/\/\/\/\/\/\/\/\/\/\/\/\|
+|        Chapter 7:        |
+|   System Configuration   |
+|\/\/\/\/\/\/\/\/\/\/\/\/\/|
+\__________________________/
+
+Booting is difficult, and everythiing has to be done in order and as fast as possible.The boot process that has been used since
+you were a baby is called System V, which contains an initialization that sets up necessary programs. It also kicks off a boot-
+strapping process run by a script called rc.
+Init is controlled by /etc/inittab, and is organized into run levels with different features; usually, full multiuser mode or
+full multiuser mode with a display manager are used. To begin, we should install the provided LFS bootscripts. Just extract, and
+then make install. A number of helpful programs come along with
+it.
+
+
