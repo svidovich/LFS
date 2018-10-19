@@ -13,3 +13,27 @@ be used. 'by-path' will use the ID_PATH value.
 
 Follow the instructions on page 232 to change the mode from its default behaviour. The rules and symlinks will be created for
 you the first time you boot LFS. If you have multiple CD-ROM drives, you will may need to fix the symlinks.
+
+It is possible that devices may be duplicated. For all classes of hardware besides network cards ( covered in 7.5 ) and sound
+cards ( covered in BLFS ), creating Udev rules for custom, persistent symlinks will prevent broken reboot orders.
+Devices that may have this issue include video cameras, bluetooth devices, and more.
+
+For all of the devices for which this is likely to be a problem, you can find the corresponding directory under /sys/class or
+/sys/block. For video devices, you may find them under /sys/class/video4linux/videoX.
+
+In order to discover the properties of video devices for example you can run the command
+
+	udevadm info -a -p /sys/class/video4linux/video0
+
+Then write rules which create the symlinks:
+
+cat > /etc/udev/rules.d/83-duplicate_devs.rules << "EOF"
+KERNEL=="video*", ATTRS{idProduct}=="1910", ATTRS{idVendor}=="0d81", \
+	SYMLINK+="webcam"
+KERNEL=="video*", ATTRS{device}=="0x036f", ATTRS{vendor}=="0x109e", \
+	SYMLINK+="tuner"
+EOF
+
+The result is that while /dev/video0 and /dev/video1 still refer randomly to two different devices and should not be used directly.
+The symlinks, however, will always point to the correct devices.
+
