@@ -98,5 +98,18 @@ We are allowed to ignore the domain keyword, but we must include some nameserver
 Next, we must configure the system hostname. The file /etc/hostname is used to establish this.
 I am going to name my machine archaea, after the first organisms which roamed our world.
 
+Now it is time to customize /etc/hosts.
+Since I have no idea what the fuck this is talking about, I am going to copy information from my host's /etc/hosts and from LFS:
 
+	127.0.0.1 localhost
+	127.0.1.1 archaea
+	::1     localhost ip6-localhost ip6-loopback
+	ff02::1 ip6-allnodes
+	ff02::2 ip6-allrouters
 
+A line like 
+
+<192.168.1.1> <FQDN> <HOSTNAME> [alias1] [alias2 ...]
+
+Needs to be changed for specific uses or requirements if assigned an ip address by a network or sys admin.
+Alias names can be omitted.
