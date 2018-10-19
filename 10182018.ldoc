@@ -1,0 +1,15 @@
+Hello!
+
+Devices can be recognized in two ways -- by path, and by id.
+By path is which bus is used for the device; by id is the id which the device's ata_id or scsi_id programs reveal.
+If you expect the physical path to the device to change, you should use 'by-id' mode. If you expect the device's id to change,
+you should use 'by-path' mode.
+You can see the values that the Udev scripts will use by running the command
+
+	udevadm test /sys/block/<device>
+
+By-id mode will use the ID_SERIAL value if it exists and is nonempty, otherwise a combination of ID_MODEL and ID_REVISION will
+be used. 'by-path' will use the ID_PATH value.
+
+Follow the instructions on page 232 to change the mode from its default behaviour. The rules and symlinks will be created for
+you the first time you boot LFS. If you have multiple CD-ROM drives, you will may need to fix the symlinks.
