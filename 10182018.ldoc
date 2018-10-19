@@ -37,3 +37,66 @@ EOF
 The result is that while /dev/video0 and /dev/video1 still refer randomly to two different devices and should not be used directly.
 The symlinks, however, will always point to the correct devices.
 
+( 7.5 ) Which interfaces are brought up and down by the network script usually depends on the files in /etc/sysconfig. This
+directory should contain a file for each interface to be configured,
+such as ifconfig.<networkcard>. The interface name ( i.e. eth0 ) is usually appropriate. Inside this file are attribtues which
+describe the interface, such as an ip address, a subnet mask, etc. It will be necessary that the stem of the filename be ifconfig.
+
+If you are unsure what your interface name is, you can run ip link or ls /sys/class/net after booting the system.
+
+We can run a command to create a simple file for eth0:
+
+cd /etc/sysconfig/
+cat > ifconfig.enp0s25 << "EOF"
+ONBOOT=yes
+IFACE=enp0s25
+SERVICE=ipv4-static
+IP=192.168.1.171
+GATEWAY=192.168.1.1
+PREFIX=24
+BROADCAST=192.168.1.255
+EOF
+
+If ONBOOT is set, then System V's networking script will bring up the NIC during the boot of the system; otherwise the interface
+will have to be brought up manually with ifup.
+
+The IFACE variable defines the interface name. It is required for all of the network device configuration files.
+
+The SERVICE variable defines the method used for obtaining an IP address. The LFS bootscripts package has a modular IP assignment
+format. Creating additional files in /lib/services/ allows other IP assignment methods. This is used for DHCP, which is addressed
+in BLFS.
+
+If there is a default gateway, set it in the file; otherwise, comment it out. The prefix variable contains the number of bits in the subnet.
+You can decide what this number should be based on the subnet mask.
+
+255.255.255.0 -- 24
+255.255.255.240 - 28
+
+etc. This can be adjusted as desired. See the ifup manpage.
+
+
+In addition, the system will need a means of obtaining DNS resolution to resolve domain names to ip addresses, and vice-versa.
+
+Make the following for /etc/resolv.conf:
+
+# Begin /etc/resolv.conf
+domain <Your Domain Name>
+nameserver <IP address of your primary nameserver>
+nameserver <IP address of your secondary nameserver>
+# End /etc/resolv.conf
+
+My host's resolv.conf only mentions a nameserver.
+By the book's reccomendation, I am going to read the man page for resolv.conf.
+
+The resolver is a set of routines in the C library that provide accerss to the internet domain name system. THe configuration
+file contains information which is read by the resolver routines the first time they are invoked by a process.
+It is meant to be human readable and contains keywords with values that provide types of resolver information.
+
+We are allowed to ignore the domain keyword, but we must include some nameservers' as such, we can use the google public DNS addresses, 8.8.8.8 and 8.8.4.4.
+
+
+Next, we must configure the system hostname. The file /etc/hostname is used to establish this.
+I am going to name my machine archaea, after the first organisms which roamed our world.
+
+
+
