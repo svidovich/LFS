@@ -73,3 +73,42 @@ status
 
 We can modify the boot process if desired.
 
+UDEV Bootscript in /etc/rc.d/init.d/udev starts udevd, and triggers any devices created by the kernel already, waiting
+for rules to complete. The script unsets uevent handler from /sbin/hotplug, since the kernel doesn't need to call out
+to a binary.
+/etc/rc.d/init.d/udev_retry retriggers events for subsystems whose rules might depend on filesystems not mounted until
+mountfs is run. To find the subsystem of a device, use udevadm info --atribute-walk <device>, where device is a path
+in /dev or /sys.
+
+To set the system clock, the setclock script is used, which reads the time from the hardware clock. setclock is run
+via udev when the kernel detects the hardware capability on boot. It can be run manually with the stop parameter to
+store the system time to the CMOS clock.
+
+I used the command hwclock --localtime --show and it displayed UTC time. If it were, I would have to configure /etc/sysconfig/clock,
+
+Next, let's learn about configuring the linux console!
+We will be configuring the console bootscript that sets the keyboard map. Without the config file, the console script
+does nothing.
+
+/etc/sysconfig/console contains lines like VARIABLE="value". Let's looks at the variables we can use:
+
+LOGLEVEL: This veriable specifies the log level for kernel messages sent to the console, from 1-8, defaulting at 7.
+KEYMAP: This specifies args for loadkeys, usually the name of a keymap to load. If nothing is set here, the default
+kernel map loads. In lfs, our keymaps are as follows: amiga, atari, i386, mac, ppc, sun. Each of these contains several folders.
+
+KEYMAP_CORRECTIONS: This is rarely used; it can be used to modify keys.
+
+FONT: This specifies arguments for the setfont program. 
+
+UNICODE: Set this to 1, yes, or true. This is harmful unless you are in a UTF locale.
+
+LEGACY_CHARSET: There is no stock Unicode keymap for many layouts; the console bootscript will convert available maps to UTF on the fly.
+
+
+Let's set up our file:
+
+KEYMAP="pl2"
+FONT="lat2a-16 -m 8859-2"
+LOGLEVEL="8"
+
+Now, keep in mind that this has nothing to do with setting up a keyboard layout for X Windows, ssh, etc.
