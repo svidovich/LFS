@@ -49,3 +49,27 @@ rc also reads a library of functions in /lib/lsb/init-functions, and a configura
 We can put any system configuration file params from the next sections heree so that everything is in one place.
 The functions script also logs output to /run/var/bootlog, which is impermanent; it is also appended to /var/log/boot.log.
 
+--
+
+We need to be able to change run levels. This is done with init <runlevel>. 
+To reboot the computer, a user could issue init 6, which is an alias for reboot. init 0 is an alias for halt.
+
+The directories in /etc/rc.d contain a number of symbolic links. Some begin with S, others with K; S means start and K 
+means kill. They are executed in the order of the numbers. The real scripts for all of this are in /etc/rc.d/init.d; 
+the scripts can be called with many parameters like start, stop, restart, reload and status. When a K link is encountered,
+the correct script is run with the start arg. The exception here is that links starting with S in rc0.d and rc6.d won't
+cause starts, but stops. This is because when a user is rebooting or halting a system, nothing will be started, only stopped.
+
+start
+	> It starts
+stop
+	> It stops
+restart
+	> It stops, then starts
+reload
+	> The configuration is updated
+status
+	> Is the service running? On which PID?
+
+We can modify the boot process if desired.
+
