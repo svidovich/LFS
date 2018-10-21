@@ -157,3 +157,9 @@ set bell-style none
 "\e[3~": delete-char
 "\e[2~": quoted-insert
 
+Let us construct /etc/shells, which contains a list of login shells on the system.  Add:
+
+/bin/sh
+/bin/bash
+
+Next time: Chapter 8! Making LFS Bootable!
