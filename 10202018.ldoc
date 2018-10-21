@@ -112,3 +112,10 @@ FONT="lat2a-16 -m 8859-2"
 LOGLEVEL="8"
 
 Now, keep in mind that this has nothing to do with setting up a keyboard layout for X Windows, ssh, etc.
+
+--
+
+Let's next consider rc.site. It lets us customize other aspects of the boot process! I have set colors and the distro name.
+I have also set FASTBOOT to yes, which skips filesystem check on reboot. I have prevented reading from the console
+during boot. I set my network hostname to be Archaea.
+
