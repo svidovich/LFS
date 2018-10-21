@@ -119,3 +119,41 @@ Let's next consider rc.site. It lets us customize other aspects of the boot proc
 I have also set FASTBOOT to yes, which skips filesystem check on reboot. I have prevented reading from the console
 during boot. I set my network hostname to be Archaea.
 
+Next, let's think about the Bash startup files. Each file has a specific use, affecting login and interactive
+environments differently.
+
+We should set up locale names so that bash knows what language we are using. I will use en_US for my setup. We can 
+create the correct file thus:
+
+export LANG=<ll>_<CC>.<charmap><@modifiers>
+so
+export LANG=en_US.iso88591
+
+Next we need to create /etc/inputrc. This is the config file for the Readline library, which provides editing 
+while the user is entering lines form the terminal. Readline is used by most terminals.
+
+Here is a generic to use:
+
+# Allow the command prompt to wrap to the next line
+set horizontal-scroll-mode Off
+# Enable 8bit input
+set meta-flag On
+set input-meta On
+# Turns off 8th bit stripping
+set convert-meta Off
+# Keep the 8th bit for display
+set output-meta On
+# none, visible or audible
+set bell-style none
+# All of the following map the escape sequence of the value
+# contained in the 1st argument to the readline specific functions
+"\eOd": backward-word
+"\eOc": forward-word
+# for linux console
+"\e[1~": beginning-of-line
+"\e[4~": end-of-line
+"\e[5~": beginning-of-history
+"\e[6~": end-of-history
+"\e[3~": delete-char
+"\e[2~": quoted-insert
+
