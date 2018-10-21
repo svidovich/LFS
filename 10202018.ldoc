@@ -1,0 +1,51 @@
+Hello!
+
+Let's talk about the System V Bootscripts.
+
+Linux uses a special boot utility named SysVinit based on a concept of run levels. It can be different from one system
+to another, so it can't be assumed that because something worked on one distro that it will work in an LFS. LFS has
+a specific way of doing things, while accepting most standards.
+
+There are seven of these run levels.
+
+0: Halt computer
+1: Single user mode
+2: Multi-user, no networking
+3: Multi-user, networking
+4: Customized, or same as 3
+5: Same as 4, usually has GUI login
+6: Reboot
+
+Let's configure Sysvinit.
+We need to configure inittab so that init can read it on kernel initialization. Configure /etc/inittab thus:
+
+id:3:initdefault:
+si::sysinit:/etc/rc.d/init.d/rc S
+l0:0:wait:/etc/rc.d/init.d/rc 0
+l1:S1:wait:/etc/rc.d/init.d/rc 1
+l2:2:wait:/etc/rc.d/init.d/rc 2
+l3:3:wait:/etc/rc.d/init.d/rc 3
+l4:4:wait:/etc/rc.d/init.d/rc 4
+l5:5:wait:/etc/rc.d/init.d/rc 5
+l6:6:wait:/etc/rc.d/init.d/rc 6
+ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
+su:S016:once:/sbin/sulogin
+1:2345:respawn:/sbin/agetty --noclear tty1 9600
+2:2345:respawn:/sbin/agetty tty2 9600
+3:2345:respawn:/sbin/agetty tty3 9600
+4:2345:respawn:/sbin/agetty tty4 9600
+5:2345:respawn:/sbin/agetty tty5 9600
+6:2345:respawn:/sbin/agetty tty6 9600
+
+I have read the man page for inittab.
+In accordance, I will be adding the following line to my inittab so that when I do ctrl-alt-del, the system shuts down:
+
+ca::ctrlaltdel:/sbin/shutdown -t1 -h now
+
+From LFS:
+The initialization file instructs rc to run all the scripts starting with an S in /etc/rc.d/rcS.d followed by all the
+scripts starting with an S in the /etc/rc.d/rc*.d directories.
+rc also reads a library of functions in /lib/lsb/init-functions, and a configuration file in /etc/sysconfig/rc.site.
+We can put any system configuration file params from the next sections heree so that everything is in one place.
+The functions script also logs output to /run/var/bootlog, which is impermanent; it is also appended to /var/log/boot.log.
+
