@@ -11,4 +11,60 @@ devpts /dev/pts devpts gid=5,mode=620 0 0
 tmpfs /run tmpfs defaults 0 0
 devtmpfs /dev devtmpfs mode=0755,nosuid 0 0
 
+Now, we need to install the kernel. We will configure, compile and install. It takes a long time.
 
+let's begin by ensuring that the kernel tree is clean:
+
+	make mrproper
+
+Make sure that the kernel install runs according to our architecture:
+
+	make defconfig
+
+And open the configuration menu:
+
+	make menuconfig
+
+Set / Unset:
+
+Device Drivers > Generic Driver Options >
+
+X Support for uevent helper
+Y Maintain a devtmpfs
+
+SELECT KERNEL UNWINDER > Frame Pointer
+
+Next,
+
+	make
+	make modules_install
+
+I don't think that the host has a separate boot partition, so I will not be copying the files following there.
+
+Now, copy a kernel image:
+
+	cp -iv arch/x86/boot/bzImage /boot/vmlinuz-4.18.5
+
+Make a symbol file for the kernel so that it can map entry points of the kernel API and the data structure addresses:
+
+	cp -iv System.map /boot/System.map-4.18.5
+
+Copy the kernel config file:
+
+	cp -iv .config /boot/config-4.18.5
+
+Install documentation:
+
+	install -d /usr/share/doc/linux-4.18.5
+
+Next, let's configure the linux module load order. Most of the time, they're loaded automatically; sometimes it needs
+help. Modprobe uses /etc/modprobe.d/usb.conf for this.
+
+Build it thus:
+
+install -v -m755 -d /etc/modprobe.d
+
+install ohci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i ohci_hcd ; true
+install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
+
+Done!
