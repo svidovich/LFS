@@ -68,3 +68,25 @@ install ohci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i ohci_hcd ; true
 install uhci_hcd /sbin/modprobe ehci_hcd ; /sbin/modprobe -i uhci_hcd ; true
 
 Done!
+
+Now, for grub:
+
+mkdir /boot/grub && cd /boot/grub
+
+I add the following to grub.cfg on the host since I have grub installed already:
+
+menuentry 'Archaea' {
+	insmod ext2
+	set root='(hd1,msdos1)'
+	linux /boot/vmlinuz-4.18.9 root=/dev/sdb2 ro
+}
+
+If you get any errors, check your fstab and your inittab. They are probably wrong.
+Also, don't be afraid of the grub command line. If you aren't sure what to use for set root, go to the grub cli and say set root=( and use the tab 
+completion. It will show you all of the partitions. In addition, the CLI accepts commands like ls <drive>, etc, which can be helpful.
+A part of my problem was that I didn't know which number my drive was because it was unlabeled and I couldn't see. I used a bootable gparted disk to
+label my partition, and that was helpful when trying to find the grub syntax.
+
+In addition, I had a few syntax errors. In the grub.cfg, I had linux=/boot... when there is not meant to be an = sign.
+
+I had some typos in my inittab that were very subtle but prevented the system from booting, and actually caused a kernel panic.
