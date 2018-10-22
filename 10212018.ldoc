@@ -90,3 +90,18 @@ label my partition, and that was helpful when trying to find the grub syntax.
 In addition, I had a few syntax errors. In the grub.cfg, I had linux=/boot... when there is not meant to be an = sign.
 
 I had some typos in my inittab that were very subtle but prevented the system from booting, and actually caused a kernel panic.
+
+
+--------------------------------------------------------------------
+
+My LFS registration is as follows:
+
+ID: 27437
+Name: Samuel Vidovich
+First LFS Version: 8.3
+
+If you are reading this, it means you made it to the end with me. I hope you are proud of yourself: what you did isn't easy; it took a lot of time and
+perseverence. This has been an incredible adventure with a lot of learning, frustration and fun. I am glad to have done it. Thanks to the following people
+for their advice and encouragement, in no particular order:
+
+Hannah B Nicholas V Alex V Matt L John T Scott L Edwin S Frank M Warren F Amy C Kyle C Casey S Matt W Dave H Nathan V Mike L Nick V Cathy V Chris D 
