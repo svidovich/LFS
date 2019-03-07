@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Run xrandr and look specifically for the word connected.
+# Those are the available monitors.
+# Then, check their names. This is very special case to my house, and my
+# setup with the thinkpad dock.
+# Finally, if those were found, then run an xrandr command to go into dual
+# screen mode; otherwise they were not found, and we should just exit.
+[ ! -z `xrandr | grep -w connected | awk '{print $1}' | grep LVDS1` ] && \
+[ ! -z `xrandr | grep -w connected | awk '{print $1}' | grep HDMI3` ] && \
+xrandr --output HDMI3 --auto --left-of LVDS1 || \
+echo "LVDS1 or HDMI3 not found"
