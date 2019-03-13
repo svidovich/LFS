@@ -1,0 +1,13 @@
+printf "//\\///// Monitor Setup //\\/////\n\n"
+monitors=`xrandr | grep -w connected | awk '{print $1}'`
+printf "The following monitors were found by xrandr:\n$monitors\n"
+printf "\nUsually, LVDSn is your laptop monitor, if applicable.\nChoose the leftmost monitor (Case Sensitive): "
+read -e choice
+echo
+[ $(echo $monitors | grep -c "$choice") -eq 0 ] && printf "$choice is not an available monitor.\n" || \
+OIFS=$IFS && IFS=$'\n' && monarray=($monitors) && IFS=$OIFS \
+
+
+[ "${monarray[0]}" == "$choice" ] && xrandr --output ${monarray[0]} --auto --left-of ${monarray[1]} || \
+xrandr --output ${monarray[1]} --auto --left-of ${monarray[0]}
+
